@@ -1,0 +1,279 @@
+<?xml version="1.0"?>
+<!-- This file is part of Tryton.  The COPYRIGHT file at the top level of
+this repository contains the full copyright notices and license terms. -->
+<tryton>
+    <data>
+        <!-- Balance Trial Detailed -->
+        <record model="ir.ui.view" id="print_trial_balance_detailed_start_view_form">
+            <field name="model">nodux_account_ec.print_trial_balance_detailed.start</field>
+            <field name="type">form</field>
+            <field name="name">trial_balance_detailed_start_form</field>
+        </record>
+        <record model="ir.action.wizard" id="wizard_trial_balance_detailed">
+            <field name="name">Trial Balance Detailed</field>
+            <field name="wiz_name">nodux_account_ec.print_trial_balance_detailed</field>
+        </record>
+        <record model="ir.action.report" id="report_trial_balance_detailed">
+            <field name="name">Trial Balance Detailed</field>
+            <field name="model"></field>
+            <field name="report_name">nodux_account_ec.trial_balance_detailed</field>
+            <field name="report">nodux_account_ec/trial_balance_detailed.odt</field>
+        </record>
+        <menuitem parent="account.menu_reporting" action="wizard_trial_balance_detailed"
+            id="menu_trial_balance_detailed" icon="tryton-print"/>
+
+        <!-- Print Auxiliary Book -->
+        <record model="ir.ui.view" id="print_auxiliary_book_start_view_form">
+            <field name="model">nodux_account_ec.print_auxiliary_book.start</field>
+            <field name="type">form</field>
+            <field name="name">print_auxiliary_book_start_form</field>
+        </record>
+
+        <record model="ir.action.wizard" id="wizard_print_auxiliary_book">
+            <field name="name">Print Auxiliary Book</field>
+            <field name="wiz_name">nodux_account_ec.print_auxiliary_book</field>
+        </record>
+
+        <menuitem parent="account.menu_reporting" action="wizard_print_auxiliary_book"
+            id="menu_print_auxiliary_book" icon="tryton-print"/>
+
+        <record model="ir.action.report" id="report_auxiliary_book">
+            <field name="name">Auxiliary Book</field>
+            <field name="model"></field>
+            <field name="report_name">account.auxiliary_book</field>
+            <field name="report">nodux_account_ec/auxiliary_book.odt</field>
+        </record>
+
+        <!-- Print Auxiliary Party -->
+        <record model="ir.ui.view" id="print_auxiliary_party_start_view_form">
+            <field name="model">nodux_account_ec.print_auxiliary_party.start</field>
+            <field name="type">form</field>
+            <field name="name">print_auxiliary_party_start_form</field>
+        </record>
+
+        <record model="ir.action.wizard" id="wizard_print_auxiliary_party">
+            <field name="name">Print Auxiliary Party</field>
+            <field name="wiz_name">nodux_account_ec.print_auxiliary_party</field>
+        </record>
+
+        <menuitem parent="account.menu_reporting" action="wizard_print_auxiliary_party"
+            id="menu_print_auxiliary_party" icon="tryton-print"/>
+
+        <record model="ir.action.report" id="report_auxiliary_party">
+            <field name="name">Auxiliary Party</field>
+            <field name="model"></field>
+            <field name="report_name">account.auxiliary_party</field>
+            <field name="report">nodux_account_ec/auxiliary_party.odt</field>
+        </record>
+
+        <record model="ir.ui.view" id="print_trial_balance_start_view_form">
+            <field name="model">account.print_trial_balance.start</field>
+            <field name="inherit" ref="account.print_trial_balance_start_view_form"/>
+            <field name="name">print_trial_balance_start_form</field>
+        </record>
+
+        <!-- Balance Sheet -->
+        <record model="ir.action.report" id="report_balance_sheet">
+            <field name="name">Balance Sheet</field>
+            <field name="model">account.account.type</field>
+            <field name="report_name">account.balance_sheet</field>
+            <field name="report">nodux_account_ec/balance_sheet.odt</field>
+        </record>
+        <record model="ir.action.keyword" id="report_balance_sheet_keyword">
+            <field name="keyword">form_print</field>
+            <field name="model">account.account.type,-1</field>
+            <field name="action" ref="report_balance_sheet"/>
+        </record>
+
+        <!-- Income Statement -->
+        <record model="ir.action.report" id="report_income_statement">
+            <field name="name">Income Statement</field>
+            <field name="model">account.account.type</field>
+            <field name="report_name">account.income_statement</field>
+            <field name="report">nodux_account_ec/income_statement.odt</field>
+        </record>
+        <record model="ir.action.keyword" id="report_income_statement_keyword">
+            <field name="keyword">form_print</field>
+            <field name="model">account.account.type,-1</field>
+            <field name="action" ref="report_income_statement"/>
+        </record>
+
+        <record model="ir.ui.view" id="account_view_form">
+            <field name="model">account.account</field>
+            <field name="inherit" ref="account.account_view_form"/>
+            <field name="name">account_form</field>
+        </record>
+
+        <record model="ir.ui.view" id="account_cashflow_template_view_form">
+            <field name="model">account.account.cashflow.template</field>
+            <field name="type">form</field>
+            <field name="name">account_cashflow_template_form</field>
+        </record>
+        <record model="ir.ui.view" id="account_cashflow_template_view_list">
+            <field name="model">account.account.cashflow.template</field>
+            <field name="type">tree</field>
+            <field name="priority" eval="10"/>
+            <field name="name">account_cashflow_template_list</field>
+        </record>
+        <record model="ir.ui.view" id="account_cashflow_template_view_tree">
+            <field name="model">account.account.cashflow.template</field>
+            <field name="type">tree</field>
+            <field name="priority" eval="20"/>
+            <field name="field_childs">childs</field>
+            <field name="name">account_cashflow_template_tree</field>
+        </record>
+        <record model="ir.action.act_window" id="act_account_cashflow_template_tree">
+            <field name="name">Account Cashflow Templates</field>
+            <field name="res_model">account.account.cashflow.template</field>
+            <field name="domain">[('parent', '=', None)]</field>
+        </record>
+        <record model="ir.action.act_window.view"
+            id="act_account_cashflow_template_tree_view1">
+            <field name="sequence" eval="10"/>
+            <field name="view" ref="account_cashflow_template_view_tree"/>
+            <field name="act_window" ref="act_account_cashflow_template_tree"/>
+        </record>
+        <record model="ir.action.act_window.view"
+            id="act_account_cashflow_template_tree_view2">
+            <field name="sequence" eval="20"/>
+            <field name="view" ref="account_cashflow_template_view_form"/>
+            <field name="act_window" ref="act_account_cashflow_template_tree"/>
+        </record>
+        <menuitem parent="account.menu_general_account_configuration"
+            action="act_account_cashflow_template_tree"
+            id="menu_account_cashflow_template_tree"/>
+
+        <record model="ir.ui.view" id="account_cashflow_view_form">
+            <field name="model">account.account.cashflow</field>
+            <field name="type">form</field>
+            <field name="name">account_cashflow_form</field>
+        </record>
+        <record model="ir.ui.view" id="account_cashflow_view_tree">
+            <field name="model">account.account.cashflow</field>
+            <field name="type">tree</field>
+            <field name="priority" eval="20"/>
+            <field name="field_childs">childs</field>
+            <field name="name">account_cashflow_tree</field>
+        </record>
+        <record model="ir.ui.view" id="account_cashflow_view_list">
+            <field name="model">account.account.cashflow</field>
+            <field name="type">tree</field>
+            <field name="priority" eval="10"/>
+            <field name="name">account_cashflow_list</field>
+        </record>
+
+        <record model="ir.action.act_window" id="act_account_cashflow_tree">
+            <field name="name">Account Cashflows</field>
+            <field name="res_model">account.account.cashflow</field>
+            <field name="domain">[('parent', '=', None)]</field>
+        </record>
+        <record model="ir.action.act_window.view" id="act_account_cashflow_tree_view1">
+            <field name="sequence" eval="10"/>
+            <field name="view" ref="account_cashflow_view_tree"/>
+            <field name="act_window" ref="act_account_cashflow_tree"/>
+        </record>
+        <record model="ir.action.act_window.view" id="act_account_cashflow_tree_view2">
+            <field name="sequence" eval="20"/>
+            <field name="view" ref="account_cashflow_view_form"/>
+            <field name="act_window" ref="act_account_cashflow_tree"/>
+        </record>
+        <menuitem parent="account.menu_general_account_configuration"
+            action="act_account_cashflow_tree" id="menu_account_cashflow_tree"/>
+
+        <record model="ir.action.act_window" id="act_account_cashflow_list">
+            <field name="name">Account Cashflows</field>
+            <field name="res_model">account.account.cashflow</field>
+        </record>
+        <record model="ir.action.act_window.view" id="act_account_cashflow_list_view1">
+            <field name="sequence" eval="10"/>
+            <field name="view" ref="account_cashflow_view_list"/>
+            <field name="act_window" ref="act_account_cashflow_list"/>
+        </record>
+        <record model="ir.action.act_window.view" id="act_account_cashflow_list_view2">
+            <field name="sequence" eval="20"/>
+            <field name="view" ref="account_cashflow_view_form"/>
+            <field name="act_window" ref="act_account_cashflow_list"/>
+        </record>
+        <menuitem parent="nodux_account_ec.menu_account_cashflow_tree"
+            action="act_account_cashflow_list" id="menu_account_cashflow_list"
+            sequence="10"/>
+
+        <record model="ir.ui.view" id="open_cashflow_statement_start_view_form">
+            <field name="model">account.open_cashflow_statement.start</field>
+            <field name="type">form</field>
+            <field name="name">open_cashflow_start_form</field>
+        </record>
+
+        <record model="ir.ui.view" id="account_cashflow_statement_view_tree">
+            <field name="model">account.account.cashflow</field>
+            <field name="type">tree</field>
+            <field name="field_childs">childs</field>
+            <field name="name">account_cashflow_statement_tree</field>
+        </record>
+        <record model="ir.action.act_window" id="act_account_cashflow_statement_tree">
+            <field name="name">CashFlow Statement</field>
+            <field name="res_model">account.account.cashflow</field>
+            <field name="domain">[('parent', '=', None)]</field>
+        </record>
+        <record model="ir.action.act_window.view" id="act_cashflow_statement_view1">
+            <field name="sequence" eval="10"/>
+            <field name="view" ref="account_cashflow_statement_view_tree"/>
+            <field name="act_window" ref="act_account_cashflow_statement_tree"/>
+        </record>
+
+        <record model="ir.action.wizard" id="wizard_open_cashflow_statement">
+            <field name="name">Open Cash Flow State</field>
+            <field name="wiz_name">account.open_cashflow_statement</field>
+        </record>
+        <menuitem parent="account.menu_reporting" action="wizard_open_cashflow_statement"
+            id="menu_open_cashflow_statement" icon="tryton-tree"
+            name="Cash Flow State"/>
+
+        <record model="ir.model.access" id="access_account_cashflow">
+            <field name="model" search="[('model', '=', 'account.account.cashflow')]"/>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="False"/>
+            <field name="perm_create" eval="False"/>
+            <field name="perm_delete" eval="False"/>
+        </record>
+        <record model="ir.model.access" id="access_account_cashflow_account_admin">
+            <field name="model" search="[('model', '=', 'account.account.cashflow')]"/>
+            <field name="group" ref="account.group_account_admin"/>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="True"/>
+            <field name="perm_create" eval="True"/>
+            <field name="perm_delete" eval="True"/>
+        </record>
+        
+        <!-- Print ATS -->
+        <record model="ir.ui.view" id="print_ats_start_view_form">
+            <field name="model">nodux_account_ec.print_ats.start</field>
+            <field name="type">form</field>
+            <field name="name">print_ats_start_form</field>
+        </record>
+
+        <record model="ir.action.wizard" id="wizard_print_ats">
+            <field name="name">Print ATS</field>
+            <field name="wiz_name">nodux_account_ec.print_ats</field>
+        </record>
+
+        <menuitem parent="account.menu_reporting" action="wizard_print_ats"
+            id="menu_print_ats" icon="tryton-print"/>
+
+        <record model="ir.action.report" id="report_ats">
+            <field name="name">ATS</field>
+            <field name="model"></field>
+            <field name="report_name">nodux_account_ec.ats</field>
+            <field name="report">nodux_account_ec/ats.xml</field>
+        </record>
+        
+        <!--Ocultar menu regla de impuestos -->
+        <record model="ir.ui.menu" id="account.menu_tax_rule_template_form">
+            <field name="active" eval="False"/>
+        </record>
+        
+        <record model="ir.ui.menu" id="account.menu_tax_rule_form">
+            <field name="active" eval="False"/>
+        </record>
+    </data>
+</tryton>
