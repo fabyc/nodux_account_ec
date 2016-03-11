@@ -2,15 +2,23 @@
 <!-- This file is part of Tryton.  The COPYRIGHT file at the top level of
 this repository contains the full copyright notices and license terms. -->
 <data>
+
     <xpath
-        expr="/form/notebook/page[@id='accounting']/label[@name='vat_number']"
+        expr="/form/notebook/page[@id='general']/field[@name='addresses']"
+        position="before">
+        <separator string="VAT" colspan="4" id="vat"/>
+        <label name="vat_number"/>
+        <field name="vat_number"/>
+    </xpath>
+    <xpath
+        expr="/form/notebook/page[@id='general']/label[@name='vat_number']"
         position="before">
         <label name="type_document"/>
         <field name="type_document"/>
         <newline/> 
     </xpath>
     <xpath
-        expr="/form/notebook/page[@id='accounting']/field[@name='type_document']"
+        expr="/form/notebook/page[@id='general']/field[@name='type_document']"
         position="after">
         <newline/> 
         <label name="type_party"/>
@@ -18,6 +26,19 @@ this repository contains the full copyright notices and license terms. -->
         <newline/> 
     </xpath>    
     
+    <xpath
+        expr="/form/notebook/page[@id='accounting']/separator[@id='vat']"
+        position="replace">
+    </xpath>
+    <xpath
+        expr="/form/notebook/page[@id='accounting']/field[@name='vat_number']"
+        position="replace">
+    </xpath>
+    
+    <xpath
+        expr="/form/notebook/page[@id='accounting']/label[@name='vat_number']"
+        position="replace">
+    </xpath>
     <xpath
         expr="/form/notebook/page[@id='accounting']/field[@name='vat_country']"
         position="replace">

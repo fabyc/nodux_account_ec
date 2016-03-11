@@ -51,7 +51,7 @@ class Party:
 
     @staticmethod
     def default_type_document():
-        return '04'
+        return '05'
 
     @classmethod
     def search_rec_name(cls, name, clause):

@@ -14,7 +14,7 @@ class Invoice:
     __name__ = 'account.invoice'  
     #campos necesarios para guia de remision y comprobante de retencion
     ambiente = fields.Date(u'Fecha de Factura que se modifica')
-    number_w = fields.Char('Number', size=20, readonly=True, select=True)
+    number_w = fields.Char('NUmero', size=20, readonly=True, select=True)
     @classmethod
     def __setup__(cls):
         super(Invoice, cls).__setup__()
