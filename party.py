@@ -28,16 +28,6 @@ class Party:
                 'readonly': ~Eval('active', True),
             },  depends=['active'])
              
-    type_party = fields.Selection([
-        ('', ''),
-        ('persona_natural', 'Persona Natural'),
-        ('entidad_publica', 'Entidad Publica'),
-        ('persona_juridica', 'Persona Juridica'),
-        ], 'Type Party', states={
-                'readonly': ~Eval('active', True),
-                'invisible': Eval('type_document') != '04',
-                }
-        )        
     
     @classmethod
     def __setup__(cls):
@@ -86,13 +76,20 @@ class Party:
             self.raise_user_error('invalid_vat_number', (self.vat_number,))
 
     def compute_check_digit(self, raw_number):
-        "Compute the check digit - Modulus 10 and 11"
         factor = 2
         x = 0
         set_check_digit = None
+        
         if self.type_document == '04':
             # Si es RUC valide segun el tipo de tercero
-            if self.type_party == 'persona_natural':
+            if int(raw_number[2]) < 6:
+                type_party='persona_natural'
+            if int(raw_number[2]) == 6:
+                type_party='entidad_publica'
+            if int(raw_number[2]) == 9:
+                type_party='persona juridica'
+                
+            if type_party == 'persona_natural':
                 if len(raw_number) != 13 or int(raw_number[2]) > 5 or raw_number[-3:] != '001':
                     return
                 number = raw_number[:9]
@@ -113,7 +110,7 @@ class Party:
                     value = 10 - (x % 10)
                 return (set_check_digit == str(value))
                     
-            elif self.type_party == 'entidad_publica':
+            elif type_party == 'entidad_publica':
                 if not len(raw_number) == 13 or raw_number[2] != '6' \
                     or raw_number[-3:] != '001':
                     return
@@ -131,7 +128,7 @@ class Party:
                     
             else:
                 if len(raw_number) != 13 or \
-                    (self.type_party in ['persona_juridica'] \
+                    (type_party in ['persona_juridica'] \
                     and int(raw_number[2]) != 9) or raw_number[-3:] != '001':
                     return
                 number = raw_number[:9]

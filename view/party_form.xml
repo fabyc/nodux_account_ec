@@ -17,15 +17,7 @@ this repository contains the full copyright notices and license terms. -->
         <field name="type_document"/>
         <newline/> 
     </xpath>
-    <xpath
-        expr="/form/notebook/page[@id='general']/field[@name='type_document']"
-        position="after">
-        <newline/> 
-        <label name="type_party"/>
-        <field name="type_party"/>
-        <newline/> 
-    </xpath>    
-    
+
     <xpath
         expr="/form/notebook/page[@id='accounting']/separator[@id='vat']"
         position="replace">
