@@ -26,7 +26,6 @@ def register():
         PartyWithholdingStart,
         #TaxesByPeriodStart,
         OpenAgedBalanceStart,
-        ATSStart,
         Template,
         Invoice,
         module='nodux_account_ec', type_='model')
@@ -41,7 +40,6 @@ def register():
         PartyWithholding,
         #TaxesByPeriod,
         AgedBalance,
-        ATS,
         CashFlowStatement,
         module='nodux_account_ec', type_='report')
     Pool.register(
@@ -53,5 +51,4 @@ def register():
         PrintPartyWithholding,
         #PrintTaxesByPeriod,
         OpenAgedBalance,
-        PrintATS,
         module='nodux_account_ec', type_='wizard')

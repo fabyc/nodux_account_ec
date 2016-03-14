@@ -23,7 +23,7 @@ __all__ = ['AuxiliaryBookStart', 'PrintAuxiliaryBook', 'AuxiliaryBook',
         'CashflowTemplate', 'OpenCashflowStart', 'Account',
         'PrintPartyWithholding', 'PartyWithholdingStart',
         'PartyWithholding', 'OpenAgedBalanceStart', 'OpenAgedBalance', 
-        'AgedBalance','ATSStart','PrintATS','ATS','CashFlowStatement'
+        'AgedBalance','CashFlowStatement'
          ]
          
 __metaclass__ = PoolMeta
@@ -1428,45 +1428,3 @@ class AgedBalance:
         return super(AgedBalance, cls).parse(report, objects, data,
             localcontext)
 
-class ATSStart(ModelView):
-    'Print ATS'
-    __name__ = 'nodux_account_ec.print_ats.start'
-    fiscalyear = fields.Many2One('account.fiscalyear', 'Fiscal Year',
-        required=True)
-    periods = fields.Many2Many('account.period', None, None, 'Periods',
-        domain=[('fiscalyear', '=', Eval('fiscalyear'))],
-        help='Leave empty for all periods of fiscal year')
-
-
-class PrintATS(Wizard):
-    'Print ATS'
-    __name__ = 'nodux_account_ec.print_ats'
-    start = StateView('nodux_account_ec.print_ats.start',
-        'nodux_account_ec.print_ats_start_view_form', [
-            Button('Cancel', 'end', 'tryton-cancel'),
-            Button('Print', 'print_', 'tryton-print', default=True),
-            ])
-    print_ = StateAction('nodux_account_ec.report_ats')
-
-    def do_print_(self, action):
-        data = {
-            'fiscalyear': self.start.fiscalyear.id,
-            'periods': self.start.periods,
-            }
-        return action, data
-
-    def transition_print_(self):
-        return 'end'
-
-class ATS(Report):
-    __name__ = 'nodux_account_ec.ats'
-
-    @classmethod
-    def parse(cls, report, objects, data, localcontext):
-        pool = Pool()
-        Account = pool.get('account.move')
-        Period = pool.get('account.period')
-        Company = pool.get('company.company')
-        #localcontext['company'] = company
-        return super(ATS, cls).parse(report, objects, data,
-            localcontext)

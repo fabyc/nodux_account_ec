@@ -245,28 +245,6 @@ this repository contains the full copyright notices and license terms. -->
             <field name="perm_delete" eval="True"/>
         </record>
         
-        <!-- Print ATS -->
-        <record model="ir.ui.view" id="print_ats_start_view_form">
-            <field name="model">nodux_account_ec.print_ats.start</field>
-            <field name="type">form</field>
-            <field name="name">print_ats_start_form</field>
-        </record>
-
-        <record model="ir.action.wizard" id="wizard_print_ats">
-            <field name="name">Print ATS</field>
-            <field name="wiz_name">nodux_account_ec.print_ats</field>
-        </record>
-
-        <menuitem parent="account.menu_reporting" action="wizard_print_ats"
-            id="menu_print_ats" icon="tryton-print"/>
-
-        <record model="ir.action.report" id="report_ats">
-            <field name="name">ATS</field>
-            <field name="model"></field>
-            <field name="report_name">nodux_account_ec.ats</field>
-            <field name="report">nodux_account_ec/ats.xml</field>
-        </record>
-        
         <!--Ocultar menu regla de impuestos -->
         <record model="ir.ui.menu" id="account.menu_tax_rule_template_form">
             <field name="active" eval="False"/>
@@ -275,5 +253,7 @@ this repository contains the full copyright notices and license terms. -->
         <record model="ir.ui.menu" id="account.menu_tax_rule_form">
             <field name="active" eval="False"/>
         </record>
+        
+            
     </data>
 </tryton>

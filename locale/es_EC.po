@@ -4,19 +4,19 @@ msgstr "Content-Type: text/plain; charset=utf-8\n"
 
 msgctxt "error:party.party:"
 msgid "Invalid VAT Number \"%s\"."
-msgstr "Número \"%s\" no es válido."
+msgstr "Número de C.I./RUC \"%s\" no es válido."
 
 msgctxt "error:party.party:"
 msgid "VAT Number already exists!"
-msgstr "¡Número de Céd./RUC ya existe!"
+msgstr "¡Número de C.I./RUC ya existe!"
 
 msgctxt "error:product.template:"
 msgid "NAME Product already exists"
-msgstr "¡Nombre de producto ya existe!"
+msgstr "Nombre de producto ya existe"
 
 msgctxt "field:account.account,cashflow:"
 msgid "Cashflow"
-msgstr "Flujo de Efectivo"
+msgstr "Flujo de efectivo"
 
 msgctxt "field:account.account.cashflow,accounts:"
 msgid "Accounts"
@@ -36,15 +36,15 @@ msgstr "Empresa"
 
 msgctxt "field:account.account.cashflow,create_date:"
 msgid "Create Date"
-msgstr "Fecha de Creación"
+msgstr "Fecha de creación"
 
 msgctxt "field:account.account.cashflow,create_uid:"
 msgid "Create User"
-msgstr "Usuario creación"
+msgstr "Creado por usuario"
 
 msgctxt "field:account.account.cashflow,currency_digits:"
 msgid "Currency Digits"
-msgstr "Decimales de Moneda"
+msgstr "Decimales de moneda"
 
 msgctxt "field:account.account.cashflow,display_balance:"
 msgid "Display Balance"
@@ -76,11 +76,11 @@ msgstr "Plantilla"
 
 msgctxt "field:account.account.cashflow,write_date:"
 msgid "Write Date"
-msgstr "Modificado por usuario"
+msgstr "Fecha de modificación"
 
 msgctxt "field:account.account.cashflow,write_uid:"
 msgid "Write User"
-msgstr "Usuario modificación"
+msgstr "Modificado por usuario"
 
 msgctxt "field:account.account.cashflow.template,childs:"
 msgid "Children"
@@ -88,11 +88,11 @@ msgstr "Hijos"
 
 msgctxt "field:account.account.cashflow.template,create_date:"
 msgid "Create Date"
-msgstr "Fecha de Creación"
+msgstr "Fecha de creación"
 
 msgctxt "field:account.account.cashflow.template,create_uid:"
 msgid "Create User"
-msgstr "Usuario creación"
+msgstr "Creado por usuario"
 
 msgctxt "field:account.account.cashflow.template,display_balance:"
 msgid "Display Balance"
@@ -120,18 +120,18 @@ msgstr "Secuencia"
 
 msgctxt "field:account.account.cashflow.template,write_date:"
 msgid "Write Date"
-msgstr "Modificado por usuario"
+msgstr "Fecha de modificación"
 
 msgctxt "field:account.account.cashflow.template,write_uid:"
 msgid "Write User"
-msgstr "Usuario modificación"
+msgstr "Modificado por usuario"
 
 msgctxt "field:account.invoice,ambiente:"
 msgid "Fecha de Factura que se modifica"
-msgstr ""
+msgstr "Fecha de factura que se modifica"
 
 msgctxt "field:account.invoice,number_w:"
-msgid "Number"
+msgid "Numero"
 msgstr "Número"
 
 msgctxt "field:account.open_aged_balance.start,employee:"
@@ -156,7 +156,7 @@ msgstr "ID"
 
 msgctxt "field:account.open_cashflow_statement.start,posted:"
 msgid "Posted Move"
-msgstr "Asiento Contabilizado"
+msgstr "Asiento contabilizado"
 
 msgctxt "field:account.open_cashflow_statement.start,start_period:"
 msgid "Start Period"
@@ -176,7 +176,7 @@ msgstr "Período final"
 
 msgctxt "field:account.party_withholding.start,fiscalyear:"
 msgid "Fiscalyear"
-msgstr "Ejercicio fiscal"
+msgstr "Año fiscal"
 
 msgctxt "field:account.party_withholding.start,id:"
 msgid "ID"
@@ -216,7 +216,7 @@ msgstr "Cuenta vacía"
 
 msgctxt "field:nodux_account_ec.print_auxiliary_book.start,end_account:"
 msgid "End Account"
-msgstr "Finalizar cuenta"
+msgstr "Cuenta final"
 
 msgctxt "field:nodux_account_ec.print_auxiliary_book.start,end_period:"
 msgid "End Period"
@@ -224,7 +224,7 @@ msgstr "Período final"
 
 msgctxt "field:nodux_account_ec.print_auxiliary_book.start,fiscalyear:"
 msgid "Fiscal Year"
-msgstr "Año Fiscal"
+msgstr "Año fiscal"
 
 msgctxt "field:nodux_account_ec.print_auxiliary_book.start,id:"
 msgid "ID"
@@ -236,11 +236,11 @@ msgstr "Terceros"
 
 msgctxt "field:nodux_account_ec.print_auxiliary_book.start,posted:"
 msgid "Posted Move"
-msgstr "Asiento Contabilizado"
+msgstr "Asiento contabilizado"
 
 msgctxt "field:nodux_account_ec.print_auxiliary_book.start,start_account:"
 msgid "Start Account"
-msgstr "Iniciar cuenta"
+msgstr "Cuenta inicial"
 
 msgctxt "field:nodux_account_ec.print_auxiliary_book.start,start_period:"
 msgid "Start Period"
@@ -260,7 +260,7 @@ msgstr "Período final"
 
 msgctxt "field:nodux_account_ec.print_auxiliary_party.start,fiscalyear:"
 msgid "Fiscal Year"
-msgstr "Año Fiscal"
+msgstr "Año fiscal"
 
 msgctxt "field:nodux_account_ec.print_auxiliary_party.start,id:"
 msgid "ID"
@@ -272,7 +272,7 @@ msgstr "Terceros"
 
 msgctxt "field:nodux_account_ec.print_auxiliary_party.start,posted:"
 msgid "Posted Move"
-msgstr "Asiento Contabilizado"
+msgstr "Asiento contabilizado"
 
 msgctxt "field:nodux_account_ec.print_auxiliary_party.start,start_period:"
 msgid "Start Period"
@@ -307,7 +307,7 @@ msgstr "Terceros"
 
 msgctxt "field:nodux_account_ec.print_trial_balance_detailed.start,posted:"
 msgid "Posted Move"
-msgstr "Asiento Contabilizado"
+msgstr "Asiento contabilizado"
 
 msgctxt ""
 "field:nodux_account_ec.print_trial_balance_detailed.start,start_period:"
@@ -328,7 +328,7 @@ msgstr "Utilice para ordenar la cuenta del flujo de efectivo"
 
 msgctxt "help:account.open_cashflow_statement.start,posted:"
 msgid "Show only posted move"
-msgstr "Muestra sólo asientos contabilizados."
+msgstr "Muestra sólo asientos contabilizados"
 
 msgctxt "help:account.print_trial_balance.start,accounts_with_balance:"
 msgid "Show accounts with balances in previous periods"
@@ -340,28 +340,28 @@ msgstr "Dejar vacío para todos los períodos del año fiscal"
 
 msgctxt "help:nodux_account_ec.print_auxiliary_book.start,empty_account:"
 msgid "With account without move"
-msgstr "Con cuenta sin asiento."
+msgstr "Con cuenta sin asiento"
 
 msgctxt "help:nodux_account_ec.print_auxiliary_book.start,posted:"
 msgid "Show only posted move"
-msgstr "Muestra sólo asientos contabilizados."
+msgstr "Muestra sólo asientos contabilizados"
 
 msgctxt "help:nodux_account_ec.print_auxiliary_party.start,empty_account:"
 msgid "With account without move"
-msgstr "Con cuenta sin asiento."
+msgstr "Con cuenta sin asiento"
 
 msgctxt "help:nodux_account_ec.print_auxiliary_party.start,posted:"
 msgid "Show only posted move"
-msgstr "Muestra sólo asientos contabilizados."
+msgstr "Muestra sólo asientos contabilizados"
 
 msgctxt ""
 "help:nodux_account_ec.print_trial_balance_detailed.start,empty_account:"
 msgid "With account without move"
-msgstr "Con cuenta sin asiento."
+msgstr "Con cuenta sin asiento"
 
 msgctxt "help:nodux_account_ec.print_trial_balance_detailed.start,posted:"
 msgid "Show only posted move"
-msgstr "Muestra sólo asientos contabilizados."
+msgstr "Muestra sólo asientos contabilizados"
 
 msgctxt "model:account.account.cashflow,name:"
 msgid "Account Cashflow"
@@ -369,7 +369,7 @@ msgstr "Cuenta de flujo de efectivo"
 
 msgctxt "model:account.account.cashflow.template,name:"
 msgid "Account Cashflow Template"
-msgstr "Plantilla de Cuenta de Flujo de Efectivo"
+msgstr "Plantilla de cuenta de flujo de efectivo"
 
 msgctxt "model:account.open_cashflow_statement.start,name:"
 msgid "Open Cashflow Statement"
@@ -377,7 +377,7 @@ msgstr "Abrir estado de flujo de efectivo"
 
 msgctxt "model:account.party_withholding.start,name:"
 msgid "Party Withholding Start"
-msgstr "Reteción de Tercero - Iniciar"
+msgstr "Retención de Tercero - Iniciar"
 
 msgctxt "model:ir.action,name:"
 msgid "Invoice Force Draw"
@@ -385,7 +385,7 @@ msgstr "Forzar factura a borrador"
 
 msgctxt "model:ir.action,name:act_account_cashflow_list"
 msgid "Account Cashflows"
-msgstr "Cuentas de Flujo de Efectivo"
+msgstr "Cuentas de flujo de efectivo"
 
 msgctxt "model:ir.action,name:act_account_cashflow_statement_tree"
 msgid "CashFlow Statement"
@@ -393,15 +393,15 @@ msgstr "Estado de flujo de efectivo"
 
 msgctxt "model:ir.action,name:act_account_cashflow_template_tree"
 msgid "Account Cashflow Templates"
-msgstr "Plantillas de Cuenta de Flujo de Efectivo"
+msgstr "Plantillas de cuenta de flujo de efectivo"
 
 msgctxt "model:ir.action,name:act_account_cashflow_tree"
 msgid "Account Cashflows"
-msgstr "Cuenta de flujo de efectivo"
+msgstr "Cuentas de flujo de efectivo"
 
 msgctxt "model:ir.action,name:report_ats"
 msgid "ATS"
-msgstr ""
+msgstr "ATS"
 
 msgctxt "model:ir.action,name:report_auxiliary_book"
 msgid "Auxiliary Book"
@@ -409,7 +409,7 @@ msgstr "Libro auxiliar"
 
 msgctxt "model:ir.action,name:report_auxiliary_party"
 msgid "Auxiliary Party"
-msgstr "Auxiliar por Tercero"
+msgstr "Auxiliar por tercero"
 
 msgctxt "model:ir.action,name:report_balance_sheet"
 msgid "Balance Sheet"
@@ -421,11 +421,11 @@ msgstr "Estado del Resultado Integral"
 
 msgctxt "model:ir.action,name:report_portfolio_party_detailed"
 msgid "Portfolio by Party Detailed"
-msgstr "Portafolio por Tercero Detallado"
+msgstr "Portafolio por Tercero detallado"
 
 msgctxt "model:ir.action,name:report_trial_balance_detailed"
 msgid "Trial Balance Detailed"
-msgstr "Balance de Comprobación Detallado"
+msgstr "Balance de comprobación detallado"
 
 msgctxt "model:ir.action,name:wizard_open_cashflow_statement"
 msgid "Open Cash Flow State"
@@ -441,7 +441,7 @@ msgstr "Imprimir libro auxiliar"
 
 msgctxt "model:ir.action,name:wizard_print_auxiliary_party"
 msgid "Print Auxiliary Party"
-msgstr "Imprimir Auxiliar por Tercero"
+msgstr "Imprimir auxiliar por Tercero"
 
 msgctxt "model:ir.action,name:wizard_trial_balance_detailed"
 msgid "Trial Balance Detailed"
@@ -453,7 +453,7 @@ msgstr "Cuentas de Flujo de Efectivo"
 
 msgctxt "model:ir.ui.menu,name:menu_account_cashflow_template_tree"
 msgid "Account Cashflow Templates"
-msgstr "Plantilla de Cuenta de Flujo de Efectivo"
+msgstr "Plantilla de Cuentas de Flujo de Efectivo"
 
 msgctxt "model:ir.ui.menu,name:menu_account_cashflow_tree"
 msgid "Account Cashflows"
@@ -469,7 +469,7 @@ msgstr "Imprimir ATS"
 
 msgctxt "model:ir.ui.menu,name:menu_print_auxiliary_book"
 msgid "Print Auxiliary Book"
-msgstr "Imprimir libro auxiliar"
+msgstr "Imprimir Libro Auxiliar"
 
 msgctxt "model:ir.ui.menu,name:menu_print_auxiliary_party"
 msgid "Print Auxiliary Party"
@@ -525,83 +525,83 @@ msgstr ":"
 
 msgctxt "odt:account.auxiliary_book:"
 msgid "CODIGO FINAL"
-msgstr ""
+msgstr "CODIGO FINAL"
 
 msgctxt "odt:account.auxiliary_book:"
 msgid "CODIGO INICIAL"
-msgstr ""
+msgstr "CODIGO INICIAL"
 
 msgctxt "odt:account.auxiliary_book:"
 msgid "CREDITO"
-msgstr ""
+msgstr "CREDITO"
 
 msgctxt "odt:account.auxiliary_book:"
 msgid "DEBITO"
-msgstr ""
+msgstr "DEBITO"
 
 msgctxt "odt:account.auxiliary_book:"
 msgid "DESCRIPCION"
-msgstr ""
+msgstr "DESCRIPCION"
 
 msgctxt "odt:account.auxiliary_book:"
 msgid "EMPRESA"
-msgstr ""
+msgstr "EMPRESA"
 
 msgctxt "odt:account.auxiliary_book:"
 msgid "FECHA"
-msgstr ""
+msgstr "FECHA"
 
 msgctxt "odt:account.auxiliary_book:"
 msgid "IMPRESION"
-msgstr ""
+msgstr "IMPRESION"
 
 msgctxt "odt:account.auxiliary_book:"
 msgid "LIBRO AUXILIAR"
-msgstr ""
+msgstr "LIBRO AUXILIAR"
 
 msgctxt "odt:account.auxiliary_book:"
 msgid "NODUX Cia. Ltda."
-msgstr ""
+msgstr "NODUX Cia. Ltda."
 
 msgctxt "odt:account.auxiliary_book:"
 msgid "N° DOC"
-msgstr ""
+msgstr "N° DOC"
 
 msgctxt "odt:account.auxiliary_book:"
 msgid "ORIGEN"
-msgstr ""
+msgstr "ORIGEN"
 
 msgctxt "odt:account.auxiliary_book:"
 msgid "PAG."
-msgstr ""
+msgstr "PAG."
 
 msgctxt "odt:account.auxiliary_book:"
 msgid "PERIODO FINAL"
-msgstr ""
+msgstr "PERIODO FINAL"
 
 msgctxt "odt:account.auxiliary_book:"
 msgid "PERIODO INICIAL"
-msgstr ""
+msgstr "PERIODO INICIAL"
 
 msgctxt "odt:account.auxiliary_book:"
 msgid "RUC/C.I."
-msgstr ""
+msgstr "RUC/C.I."
 
 msgctxt "odt:account.auxiliary_book:"
 msgid "S"
-msgstr ""
+msgstr "S"
 
 msgctxt "odt:account.auxiliary_book:"
 msgid "SALDO"
-msgstr ""
+msgstr "SALDO"
 
 msgctxt "odt:account.auxiliary_book:"
 msgid "TERCERO"
-msgstr ""
+msgstr "TERCERO"
 
 msgctxt "odt:account.auxiliary_book:"
 msgid "TERCERO:"
-msgstr ""
+msgstr "TERCERO:"
 
 msgctxt "odt:account.auxiliary_book:"
 msgid "TOTAL"
@@ -609,11 +609,11 @@ msgstr "TOTAL"
 
 msgctxt "odt:account.auxiliary_book:"
 msgid "["
-msgstr ""
+msgstr "["
 
 msgctxt "odt:account.auxiliary_book:"
 msgid "]"
-msgstr ""
+msgstr "]"
 
 msgctxt "odt:account.auxiliary_party:"
 msgid "$"
@@ -629,7 +629,7 @@ msgstr ")"
 
 msgctxt "odt:account.auxiliary_party:"
 msgid "-"
-msgstr ""
+msgstr "-"
 
 msgctxt "odt:account.auxiliary_party:"
 msgid "/"
@@ -641,75 +641,75 @@ msgstr ":"
 
 msgctxt "odt:account.auxiliary_party:"
 msgid "BASE"
-msgstr ""
+msgstr "BASE"
 
 msgctxt "odt:account.auxiliary_party:"
 msgid "CREDITO"
-msgstr ""
+msgstr "CREDITO"
 
 msgctxt "odt:account.auxiliary_party:"
 msgid "CUENTA"
-msgstr ""
+msgstr "CUENTA"
 
 msgctxt "odt:account.auxiliary_party:"
 msgid "DEBITO"
-msgstr ""
+msgstr "DEBITO"
 
 msgctxt "odt:account.auxiliary_party:"
 msgid "DESCRIPCION"
-msgstr ""
+msgstr "DESCRIPCION"
 
 msgctxt "odt:account.auxiliary_party:"
 msgid "EMPRESA"
-msgstr ""
+msgstr "EMPRESA"
 
 msgctxt "odt:account.auxiliary_party:"
 msgid "FECHA"
-msgstr ""
+msgstr "FECHA"
 
 msgctxt "odt:account.auxiliary_party:"
 msgid "IMPRESION"
-msgstr ""
+msgstr "IMPRESION"
 
 msgctxt "odt:account.auxiliary_party:"
 msgid "LIBRO AUXILIAR"
-msgstr ""
+msgstr "LIBRO AUXILIAR"
 
 msgctxt "odt:account.auxiliary_party:"
 msgid "MOVIMIENTO"
-msgstr ""
+msgstr "MOVIMIENTO"
 
 msgctxt "odt:account.auxiliary_party:"
 msgid "Nodux Cía.Ltda."
-msgstr ""
+msgstr "Nodux Cía. Ltda."
 
 msgctxt "odt:account.auxiliary_party:"
 msgid "N° DOC"
-msgstr ""
+msgstr "N° DOC"
 
 msgctxt "odt:account.auxiliary_party:"
 msgid "PAG."
-msgstr ""
+msgstr "PAG."
 
 msgctxt "odt:account.auxiliary_party:"
 msgid "PERIODO FINAL:"
-msgstr ""
+msgstr "PERIODO FINAL:"
 
 msgctxt "odt:account.auxiliary_party:"
 msgid "PERIODO INICIAL:"
-msgstr ""
+msgstr "PERIODO INICIAL:"
 
 msgctxt "odt:account.auxiliary_party:"
 msgid "POR TERCEROS"
-msgstr ""
+msgstr "POR TERCEROS"
 
 msgctxt "odt:account.auxiliary_party:"
 msgid "RUC/C.I."
-msgstr ""
+msgstr "RUC/C.I."
 
 msgctxt "odt:account.auxiliary_party:"
 msgid "TERCERO:"
-msgstr ""
+msgstr "TERCERO:"
 
 msgctxt "odt:account.auxiliary_party:"
 msgid "TOTAL"
@@ -717,11 +717,11 @@ msgstr "TOTAL"
 
 msgctxt "odt:account.auxiliary_party:"
 msgid "["
-msgstr ""
+msgstr "["
 
 msgctxt "odt:account.auxiliary_party:"
 msgid "]"
-msgstr ""
+msgstr "]"
 
 msgctxt "odt:account.balance_sheet:"
 msgid "$"
@@ -745,11 +745,11 @@ msgstr ":"
 
 msgctxt "odt:account.balance_sheet:"
 msgid "A LA"
-msgstr ""
+msgstr "A LA"
 
 msgctxt "odt:account.balance_sheet:"
 msgid "EMPRESA"
-msgstr ""
+msgstr "EMPRESA"
 
 msgctxt "odt:account.balance_sheet:"
 msgid "ESTADO DE SITUACION FINANCIERA"
@@ -757,23 +757,23 @@ msgstr "ESTADO DE SITUACION FINANCIERA"
 
 msgctxt "odt:account.balance_sheet:"
 msgid "FECHA"
-msgstr ""
+msgstr "FECHA"
 
 msgctxt "odt:account.balance_sheet:"
 msgid "FECHA DE IMPRESIÓN:"
-msgstr ""
+msgstr "FECHA DE IMPRESIÓN:"
 
 msgctxt "odt:account.balance_sheet:"
 msgid "Nodux Cía.Ltda"
-msgstr ""
+msgstr "Nodux Cía. Ltda."
 
 msgctxt "odt:account.balance_sheet:"
 msgid "[ PAG."
-msgstr ""
+msgstr "[ PAG."
 
 msgctxt "odt:account.balance_sheet:"
 msgid "]"
-msgstr ""
+msgstr "]"
 
 msgctxt "odt:account.income_statement:"
 msgid "$"
@@ -797,15 +797,15 @@ msgstr ":"
 
 msgctxt "odt:account.income_statement:"
 msgid "ANALISIS"
-msgstr ""
+msgstr "ANALISIS"
 
 msgctxt "odt:account.income_statement:"
 msgid "DESCRIPCION"
-msgstr ""
+msgstr "DESCRIPCION"
 
 msgctxt "odt:account.income_statement:"
 msgid "EMPRESA"
-msgstr ""
+msgstr "EMPRESA"
 
 msgctxt "odt:account.income_statement:"
 msgid "ESTADO DE RESULTADO"
@@ -813,35 +813,35 @@ msgstr "ESTADO DEL RESULTADO INTEGRAL"
 
 msgctxt "odt:account.income_statement:"
 msgid "FECHA DE IMPRESIÓN:"
-msgstr ""
+msgstr "FECHA DE IMPRESIÓN:"
 
 msgctxt "odt:account.income_statement:"
 msgid "INTEGRAL"
-msgstr ""
+msgstr "INTEGRAL"
 
 msgctxt "odt:account.income_statement:"
 msgid "Nodux Cia.Ltda."
-msgstr ""
+msgstr "Nodux Cía. Ltda."
 
 msgctxt "odt:account.income_statement:"
 msgid "PERIODO FINAL"
-msgstr ""
+msgstr "PERIODO FINAL"
 
 msgctxt "odt:account.income_statement:"
 msgid "PERIODO INICIAL"
-msgstr ""
+msgstr "PERIODO INICIAL"
 
 msgctxt "odt:account.income_statement:"
 msgid "VERTICAL"
-msgstr ""
+msgstr "VERTICAL"
 
 msgctxt "odt:account.income_statement:"
 msgid "[ PAG."
-msgstr ""
+msgstr "[ PAG."
 
 msgctxt "odt:account.income_statement:"
 msgid "]"
-msgstr ""
+msgstr "]"
 
 msgctxt "odt:nodux_account_ec.trial_balance_detailed:"
 msgid "$"
@@ -857,7 +857,7 @@ msgstr ")"
 
 msgctxt "odt:nodux_account_ec.trial_balance_detailed:"
 msgid "-"
-msgstr ""
+msgstr "-"
 
 msgctxt "odt:nodux_account_ec.trial_balance_detailed:"
 msgid "/"
@@ -869,75 +869,75 @@ msgstr ":"
 
 msgctxt "odt:nodux_account_ec.trial_balance_detailed:"
 msgid "AT"
-msgstr ""
+msgstr "AT"
 
 msgctxt "odt:nodux_account_ec.trial_balance_detailed:"
 msgid "BALANCE"
-msgstr ""
+msgstr "BALANCE"
 
 msgctxt "odt:nodux_account_ec.trial_balance_detailed:"
 msgid "COD. FINAL :"
-msgstr ""
+msgstr "COD. FINAL:"
 
 msgctxt "odt:nodux_account_ec.trial_balance_detailed:"
 msgid "COD. INICIAL"
-msgstr ""
+msgstr "COD. INICIAL:"
 
 msgctxt "odt:nodux_account_ec.trial_balance_detailed:"
 msgid "CREDITO"
-msgstr ""
+msgstr "CREDITO"
 
 msgctxt "odt:nodux_account_ec.trial_balance_detailed:"
 msgid "DE PRUEBA DETALLADO"
-msgstr ""
+msgstr "DE PRUEBA DETALLADO"
 
 msgctxt "odt:nodux_account_ec.trial_balance_detailed:"
 msgid "DEBITO"
-msgstr ""
+msgstr "DEBITO"
 
 msgctxt "odt:nodux_account_ec.trial_balance_detailed:"
 msgid "EMPRESA"
-msgstr ""
+msgstr "EMPRESA"
 
 msgctxt "odt:nodux_account_ec.trial_balance_detailed:"
 msgid "FECHA DE IMPRESIÓN:"
-msgstr ""
+msgstr "FECHA DE IMPRESIÓN:"
 
 msgctxt "odt:nodux_account_ec.trial_balance_detailed:"
 msgid "IO"
-msgstr ""
+msgstr "IO"
 
 msgctxt "odt:nodux_account_ec.trial_balance_detailed:"
 msgid "Nodux Cía.Ltda"
-msgstr ""
+msgstr "Nodux Cía. Ltda."
 
 msgctxt "odt:nodux_account_ec.trial_balance_detailed:"
 msgid "PAG."
-msgstr ""
+msgstr "PAG."
 
 msgctxt "odt:nodux_account_ec.trial_balance_detailed:"
 msgid "PERIODO"
-msgstr ""
+msgstr "PERIODO"
 
 msgctxt "odt:nodux_account_ec.trial_balance_detailed:"
 msgid "R"
-msgstr ""
+msgstr "R"
 
 msgctxt "odt:nodux_account_ec.trial_balance_detailed:"
 msgid "RUC/C.I."
-msgstr ""
+msgstr "RUC/C.I."
 
 msgctxt "odt:nodux_account_ec.trial_balance_detailed:"
 msgid "SALDO FINAL"
-msgstr ""
+msgstr "SALDO FINAL"
 
 msgctxt "odt:nodux_account_ec.trial_balance_detailed:"
 msgid "SALDO INICIAL"
-msgstr ""
+msgstr "SALDO INICIAL"
 
 msgctxt "odt:nodux_account_ec.trial_balance_detailed:"
 msgid "TERCERO"
-msgstr ""
+msgstr "TERCERO"
 
 msgctxt "odt:nodux_account_ec.trial_balance_detailed:"
 msgid "TOTAL"
@@ -945,27 +945,27 @@ msgstr "TOTAL"
 
 msgctxt "odt:nodux_account_ec.trial_balance_detailed:"
 msgid "UA"
-msgstr ""
+msgstr "UA"
 
 msgctxt "odt:nodux_account_ec.trial_balance_detailed:"
 msgid "US"
-msgstr ""
+msgstr "US"
 
 msgctxt "odt:nodux_account_ec.trial_balance_detailed:"
 msgid "["
-msgstr ""
+msgstr "["
 
 msgctxt "odt:nodux_account_ec.trial_balance_detailed:"
 msgid "]"
-msgstr ""
+msgstr "]"
 
 msgctxt "odt:party.portfolio_party_detailed:"
 msgid "# FACTURA"
-msgstr ""
+msgstr "No. FACTURA"
 
 msgctxt "odt:party.portfolio_party_detailed:"
 msgid "# VENTA / COMPRA"
-msgstr ""
+msgstr "No. VENTA / COMPRA"
 
 msgctxt "odt:party.portfolio_party_detailed:"
 msgid "$"
@@ -981,11 +981,11 @@ msgstr ")"
 
 msgctxt "odt:party.portfolio_party_detailed:"
 msgid ","
-msgstr ""
+msgstr ","
 
 msgctxt "odt:party.portfolio_party_detailed:"
 msgid "-"
-msgstr ""
+msgstr "-"
 
 msgctxt "odt:party.portfolio_party_detailed:"
 msgid "/"
@@ -993,59 +993,59 @@ msgstr "/"
 
 msgctxt "odt:party.portfolio_party_detailed:"
 msgid "/for"
-msgstr ""
+msgstr "/for"
 
 msgctxt "odt:party.portfolio_party_detailed:"
 msgid "00/00/0000"
-msgstr ""
+msgstr "00/00/0000"
 
 msgctxt "odt:party.portfolio_party_detailed:"
 msgid "00:00:00"
-msgstr ""
+msgstr "00:00:00"
 
 msgctxt "odt:party.portfolio_party_detailed:"
 msgid "???"
-msgstr ""
+msgstr "???"
 
 msgctxt "odt:party.portfolio_party_detailed:"
 msgid "ANTIGUEDAD"
-msgstr ""
+msgstr "ANTIGUEDAD"
 
 msgctxt "odt:party.portfolio_party_detailed:"
 msgid "DESCRIPCION"
-msgstr ""
+msgstr "DESCRIPCION"
 
 msgctxt "odt:party.portfolio_party_detailed:"
 msgid "ESTADO"
-msgstr ""
+msgstr "ESTADO"
 
 msgctxt "odt:party.portfolio_party_detailed:"
 msgid "FECHA"
-msgstr ""
+msgstr "FECHA"
 
 msgctxt "odt:party.portfolio_party_detailed:"
 msgid "FECHA ESTIMADA DE PAGO"
-msgstr ""
+msgstr "FECHA ESTIMADA DE PAGO"
 
 msgctxt "odt:party.portfolio_party_detailed:"
 msgid "INFORME DE CARTERA POR TERCEROS DETALLLADO"
-msgstr ""
+msgstr "INFORME DE CARTERA POR TERCEROS DETALLADO"
 
 msgctxt "odt:party.portfolio_party_detailed:"
 msgid "OBSERVACIONES"
-msgstr ""
+msgstr "OBSERVACIONES"
 
 msgctxt "odt:party.portfolio_party_detailed:"
 msgid "Página"
-msgstr ""
+msgstr "Página"
 
 msgctxt "odt:party.portfolio_party_detailed:"
 msgid "RUC/C.I..:"
-msgstr ""
+msgstr "RUC/C.I.:"
 
 msgctxt "odt:party.portfolio_party_detailed:"
 msgid "TERCERO:"
-msgstr ""
+msgstr "TERCERO:"
 
 msgctxt "odt:party.portfolio_party_detailed:"
 msgid "TOTAL"
@@ -1053,7 +1053,7 @@ msgstr "TOTAL"
 
 msgctxt "odt:party.portfolio_party_detailed:"
 msgid "VALOR TOTAL"
-msgstr ""
+msgstr "VALOR TOTAL"
 
 msgctxt "odt:party.portfolio_party_detailed:"
 msgid "for each='invoice in party.invoices'"
@@ -1109,7 +1109,7 @@ msgstr ""
 
 msgctxt "odt:party.portfolio_party_detailed:"
 msgid "€"
-msgstr ""
+msgstr "€"
 
 msgctxt "selection:account.account.cashflow,display_balance:"
 msgid "Credit - Debit"
@@ -1141,15 +1141,15 @@ msgstr ""
 
 msgctxt "selection:party.party,type_document:"
 msgid "Cedula"
-msgstr ""
+msgstr "Cédula"
 
 msgctxt "selection:party.party,type_document:"
 msgid "Consumidor Final"
-msgstr ""
+msgstr "Consumidor Final"
 
 msgctxt "selection:party.party,type_document:"
 msgid "Pasaporte"
-msgstr ""
+msgstr "Pasaporte"
 
 msgctxt "selection:party.party,type_document:"
 msgid "RUC"
@@ -1161,27 +1161,27 @@ msgstr ""
 
 msgctxt "selection:party.party,type_party:"
 msgid "Entidad Publica"
-msgstr ""
+msgstr "Entidad pública"
 
 msgctxt "selection:party.party,type_party:"
 msgid "Persona Juridica"
-msgstr ""
+msgstr "Persona juridica"
 
 msgctxt "selection:party.party,type_party:"
 msgid "Persona Natural"
-msgstr ""
+msgstr "Persona natural"
 
 msgctxt "view:account.account.cashflow.template:"
 msgid "Account Cashflow Template"
-msgstr "Plantilla de cuenta de flujo de efectivo"
+msgstr "Plantilla de cuenta de Flujo de Efectivo"
 
 msgctxt "view:account.account.cashflow.template:"
 msgid "Account Cashflows Templates"
-msgstr "Plantillas de Cuenta de Flujo de Efectivo"
+msgstr "Plantillas de cuenta de Flujo de Efectivo"
 
 msgctxt "view:account.account.cashflow:"
 msgid "Account Cashflow"
-msgstr "Cuenta de flujo de efectivo"
+msgstr "Cuenta de Flujo de Efectivo"
 
 msgctxt "view:account.account.cashflow:"
 msgid "Income Statement"
@@ -1206,6 +1206,10 @@ msgstr "Imprimir auxiliar por tercero"
 msgctxt "view:nodux_account_ec.print_trial_balance_detailed.start:"
 msgid "Print Trial Balance"
 msgstr "Imprimir Balance de Comprobación"
+
+msgctxt "view:party.party:"
+msgid "VAT"
+msgstr "C.I./RUC"
 
 msgctxt "wizard_button:account.open_cashflow_statement,start,end:"
 msgid "Cancel"
