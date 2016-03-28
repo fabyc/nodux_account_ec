@@ -28,6 +28,7 @@ def register():
         OpenAgedBalanceStart,
         Template,
         Invoice,
+        #Product,
         module='nodux_account_ec', type_='model')
     Pool.register(
         AuxiliaryBook,
@@ -41,6 +42,7 @@ def register():
         #TaxesByPeriod,
         AgedBalance,
         CashFlowStatement,
+        InvoiceReport,
         module='nodux_account_ec', type_='report')
     Pool.register(
         PrintAuxiliaryBook,
