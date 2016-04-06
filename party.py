@@ -5,8 +5,9 @@ from trytond.pool import *
 from trytond.model import fields
 from trytond.pyson import Eval
 from trytond.pyson import Id
+from trytond.pyson import Bool, Eval
 
-__all__ = ['Party', 'BankAccountNumber', 'Company' , 'Configuration']
+__all__ = ['Party', 'BankAccountNumber', 'Company']
 __metaclass__ = PoolMeta
 
 STATES = {
@@ -35,13 +36,6 @@ class Party:
             'required': Eval('contribuyente_especial',True),
             }, help="Contribuyente Especial Nro.")
     
-    vat_number = fields.Char('VAT Number', help="Value Added Tax number",
-        states={
-            'readonly': Eval('type_document')=='07',
-            'required': Bool(Eval('vat_country')),
-            },
-        depends=['active', 'vat_country'])
-        
     type_document = fields.Selection([
                 ('', ''),
                 ('04', 'RUC'),
