@@ -254,6 +254,10 @@ this repository contains the full copyright notices and license terms. -->
             <field name="active" eval="False"/>
         </record>
         
-            
+        <!--Ocultar menu vistas de libro diario-->
+        <record model="ir.ui.menu" id="account.menu_journal_view_form">
+            <field name="active" eval="False"/>
+        </record>
+        
     </data>
 </tryton>
