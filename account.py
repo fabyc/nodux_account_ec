@@ -896,18 +896,39 @@ class BalanceSheet(Report):
 
     @classmethod
     def parse(cls, report, objects, data, localcontext):
-        localcontext['company'] = Transaction().context.get('company.rec_name')
+        pool = Pool()
+        User = pool.get('res.user')
+        
+        user = User(Transaction().user)
+        
+        if user.company.timezone:
+            timezone = pytz.timezone(user.company.timezone)
+            dt = datetime.now()
+            hora = datetime.astimezone(dt.replace(tzinfo=pytz.utc), timezone)
+
+        localcontext['fecha'] = hora.strftime('%d/%m/%Y')
+        localcontext['hora'] = hora.strftime('%H:%M:%S')
+        localcontext['company'] = user.company
         localcontext['date'] = Transaction().context.get('date')
         return super(BalanceSheet, cls).parse(report, objects, data, localcontext)
-
-
+        
 class IncomeStatement(Report):
     'Income Statement'
     __name__ = 'account.income_statement'
 
     @classmethod
     def parse(cls, report, objects, data, localcontext):
-        localcontext['company'] = Transaction().context.get('company.rec_name')
+        pool = Pool()
+        User = pool.get('res.user')
+        user = User(Transaction().user)
+        if user.company.timezone:
+            timezone = pytz.timezone(user.company.timezone)
+            dt = datetime.now()
+            hora = datetime.astimezone(dt.replace(tzinfo=pytz.utc), timezone)
+
+        localcontext['fecha'] = hora.strftime('%d/%m/%Y')
+        localcontext['hora'] = hora.strftime('%H:%M:%S')
+        localcontext['company'] = user.company
         localcontext['date'] = Transaction().context.get('date')
         return super(IncomeStatement, cls).parse(report, objects, data, localcontext)
 
@@ -1423,8 +1444,5 @@ class AgedBalance:
     @classmethod
     def parse(cls, report, objects, data, localcontext):
         pool = Pool()
-        Employee = pool.get('employee')
-        Category = pool.get('category')
         return super(AgedBalance, cls).parse(report, objects, data,
             localcontext)
-

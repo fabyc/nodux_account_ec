@@ -4,10 +4,12 @@
 from trytond.pool import Pool
 from .party import *
 from .account import *
+#from .tax import *
 from .product import *
 from .invoice import *
 def register():
     Pool.register(
+        #Tax,
         Party,
         Company,
         BankAccountNumber,
@@ -20,9 +22,11 @@ def register():
         PrintTrialBalanceStart,
         OpenCashflowStart,
         PartyWithholdingStart,
+        #TaxesByPeriodStart,
         OpenAgedBalanceStart,
         Template,
         Invoice,
+        #Product,
         module='nodux_account_ec', type_='model')
     Pool.register(
         AuxiliaryBook,
@@ -33,6 +37,7 @@ def register():
         BalanceSheet,
         IncomeStatement,
         PartyWithholding,
+        #TaxesByPeriod,
         AgedBalance,
         CashFlowStatement,
         InvoiceReport,
@@ -44,5 +49,6 @@ def register():
         PrintTrialBalance,
         OpenCashflowStatement,
         PrintPartyWithholding,
+        #PrintTaxesByPeriod,
         OpenAgedBalance,
         module='nodux_account_ec', type_='wizard')
