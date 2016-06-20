@@ -13,19 +13,21 @@ from trytond.pyson import Eval, PYSONEncoder
 from trytond.transaction import Transaction
 from trytond.pool import Pool, PoolMeta
 from trytond.modules.company import CompanyReport
+import pytz
+from datetime import datetime,timedelta
 
 __all__ = ['AuxiliaryBookStart', 'PrintAuxiliaryBook', 'AuxiliaryBook',
-        'PortfolioByPartyDetailed', 'TrialBalanceDetailed', 
+        'PortfolioByPartyDetailed', 'TrialBalanceDetailed',
         'PrintTrialBalanceDetailed', 'PrintTrialBalanceDetailedStart',
         'PrintAuxiliaryParty', 'AuxiliaryParty', 'AuxiliaryPartyStart',
         'PrintTrialBalanceStart', 'PrintTrialBalance', 'TrialBalance',
-        'OpenCashflowStatement', 'Cashflow', 'BalanceSheet', 'IncomeStatement', 
+        'OpenCashflowStatement', 'Cashflow', 'BalanceSheet', 'IncomeStatement',
         'CashflowTemplate', 'OpenCashflowStart', 'Account',
         'PrintPartyWithholding', 'PartyWithholdingStart',
-        'PartyWithholding', 'OpenAgedBalanceStart', 'OpenAgedBalance', 
-        'AgedBalance','CashFlowStatement'
-         ]
-         
+        'PartyWithholding', 'OpenAgedBalanceStart', 'OpenAgedBalance',
+        'AgedBalance','CashFlowStatement', 'TotalAnaliticCost', 'OpenAnalitic',
+        'OpenCostAnalitic', 'OpenTotalSale', 'TotalSale', 'TotalSaleReport']
+
 __metaclass__ = PoolMeta
 
 def fmt_acc(val):
@@ -36,7 +38,7 @@ def fmt_acc(val):
 
 class Account:
     __name__ = 'account.account'
-    cashflow = fields.Many2One('account.account.cashflow', 'Cashflow', 
+    cashflow = fields.Many2One('account.account.cashflow', 'Cashflow',
         ondelete="RESTRICT", states={
             'invisible': Eval('kind') == 'view',
             },
@@ -62,12 +64,12 @@ class AuxiliaryBookStart(ModelView):
             ],
         depends=['fiscalyear', 'start_period'])
     start_account = fields.Many2One('account.account', 'Start Account',
-            domain=[ 
+            domain=[
                 ('kind', '!=', 'view'),
                 ('code', '!=', None),
             ])
     end_account = fields.Many2One('account.account', 'End Account',
-            domain=[ 
+            domain=[
                 ('kind', '!=', 'view'),
                 ('code', '!=', None),
             ])
@@ -330,7 +332,7 @@ class AuxiliaryBook(Report):
         return res
 
 
-class PortfolioByPartyDetailed(Report): 
+class PortfolioByPartyDetailed(Report):
     __name__ = 'party.portfolio_party_detailed'
 
     @classmethod
@@ -363,7 +365,7 @@ class PortfolioByPartyDetailed(Report):
             party.sum_invoices = sum_invoices
             party.sum_amount_to_pay = sum_amount_to_pay
             new_objects.append(party)
-        return super(PortfolioByPartyDetailed, cls).parse(report, 
+        return super(PortfolioByPartyDetailed, cls).parse(report,
                 new_objects, data, localcontext)
 
 class PrintTrialBalanceDetailedStart(ModelView):
@@ -741,8 +743,8 @@ class AuxiliaryParty(Report):
                                 base += tx_line.amount
                 new_line.update({'base': base})
                 new_lines.append(new_line)
-                debits_.append(line.debit) 
-                credits_.append(line.credit) 
+                debits_.append(line.debit)
+                credits_.append(line.credit)
             db = sum(debits_)
             cr = sum(credits_)
             party = Party(data['party'])
@@ -770,7 +772,7 @@ class AuxiliaryParty(Report):
 class PrintTrialBalanceStart:
     'Print Trial Balance'
     __name__ = 'account.print_trial_balance.start'
-    accounts_with_balance = fields.Boolean('Accounts with Balance', 
+    accounts_with_balance = fields.Boolean('Accounts with Balance',
             help='Show accounts with balances in previous periods')
 
 
@@ -872,7 +874,7 @@ class TrialBalance:
                     'credit': in_account.credit,
                     'end_balance': end_account.balance,
                     })
-                    
+
         periods = end_periods
         localcontext['accounts'] = accounts
         periods.sort(key=operator.attrgetter('start_date'))
@@ -889,7 +891,7 @@ class TrialBalance:
         for account in accounts:
             amount += account[field]
         return amount
-        
+
 class BalanceSheet(Report):
     'Sheet Balance'
     __name__ = 'account.balance_sheet'
@@ -898,9 +900,9 @@ class BalanceSheet(Report):
     def parse(cls, report, objects, data, localcontext):
         pool = Pool()
         User = pool.get('res.user')
-        
+
         user = User(Transaction().user)
-        
+
         if user.company.timezone:
             timezone = pytz.timezone(user.company.timezone)
             dt = datetime.now()
@@ -911,7 +913,7 @@ class BalanceSheet(Report):
         localcontext['company'] = user.company
         localcontext['date'] = Transaction().context.get('date')
         return super(BalanceSheet, cls).parse(report, objects, data, localcontext)
-        
+
 class IncomeStatement(Report):
     'Income Statement'
     __name__ = 'account.income_statement'
@@ -1068,7 +1070,7 @@ class Cashflow(ModelSQL, ModelView):
             ondelete="RESTRICT")
     template = fields.Many2One('account.account.cashflow.template', 'Template')
     accounts = fields.One2Many('account.account', 'cashflow', 'Accounts',
-            add_remove=[], domain=[ 
+            add_remove=[], domain=[
                 ('kind', '!=', 'view'),
             ])
 
@@ -1298,7 +1300,7 @@ class CashFlowStatement(Report):
 class PartyWithholdingStart(ModelView):
     'Party Withholding Start'
     __name__ = 'account.party_withholding.start'
-    fiscalyear = fields.Many2One('account.fiscalyear', 'Fiscalyear', 
+    fiscalyear = fields.Many2One('account.fiscalyear', 'Fiscalyear',
         required=True)
     company = fields.Many2One('company.company', 'Company', required=True)
     party = fields.Many2One('party.party', 'Party')
@@ -1417,20 +1419,20 @@ class PartyWithholding(CompanyReport):
         localcontext['reporte'] = data['certificate_report']
         return super(PartyWithholding, cls).parse(report, objects, data,
                 localcontext)
-                
+
 class OpenAgedBalanceStart:
     __name__ = 'account.open_aged_balance.start'
     employee = fields.Many2One('res.user','Employee', states={
             'invisible': Eval('balance_type')!= 'customer',
             }, depends=['balance_type'])
-           
+
     @classmethod
     def __setup__(cls):
         super(OpenAgedBalanceStart, cls).__setup__()
-           
+
 class OpenAgedBalance:
     __name__='account._open_aged_balance'
-    
+
     def do_print_(self, action):
         data = {
             'employee': self.start.employee.id,
@@ -1445,4 +1447,293 @@ class AgedBalance:
     def parse(cls, report, objects, data, localcontext):
         pool = Pool()
         return super(AgedBalance, cls).parse(report, objects, data,
+            localcontext)
+
+class OpenCostAnalitic(ModelView):
+    'Open Cost Analitic'
+    __name__ = 'nodux_account_ec.print_cost_analitic.start'
+    fecha = fields.Date('Fecha de ventas', help='Fecha para analitico de costo de ventas')
+    company = fields.Many2One('company.company', 'Company', required=True)
+
+    @staticmethod
+    def default_company():
+        return Transaction().context.get('company')
+
+
+    @staticmethod
+    def default_fecha():
+        Date = Pool().get('ir.date')
+        date = Date.today()
+        return date
+
+class OpenAnalitic(Wizard):
+    'Open Analitic'
+    __name__ = 'nodux_account_ec.print_cost_analitic'
+
+    start = StateView('nodux_account_ec.print_cost_analitic.start',
+        'nodux_account_ec.print_cost_analitic_start_view_form', [
+            Button('Cancel', 'end', 'tryton-cancel'),
+            Button('Print', 'print_', 'tryton-ok', default=True),
+            ])
+    print_ = StateAction('nodux_account_ec.report_cost_analitic')
+
+    def do_print_(self, action):
+        if self.start.fecha:
+            fecha = self.start.fecha
+        if self.start.company:
+            company = self.start.company
+
+        data = {
+            'fecha': fecha,
+            'company': company.id,
+            }
+        return action, data
+
+    def transition_print_(self):
+        return 'end'
+
+class TotalAnaliticCost(Report):
+    'Total Analitic Cost'
+    __name__ = 'nodux_account_ec.cost_analitic'
+
+    @classmethod
+    def parse(cls, report, objects, data, localcontext):
+        pool = Pool()
+        Company = pool.get('company.company')
+        Sale = pool.get('sale.sale')
+        SaleLine = pool.get('sale.line')
+        fecha = data['fecha']
+        company = Company(data['company'])
+
+        if company.timezone:
+            timezone = pytz.timezone(company.timezone)
+            Date = Pool().get('ir.date')
+            date = datetime.today()
+            dt = date
+            print "La fecha ", dt
+            fecha_im = datetime.astimezone(dt.replace(tzinfo=pytz.utc), timezone)
+
+        sales = Sale.search([('sale_date', '=', fecha)])
+        s_lines = []
+        print "Asientos ", sales
+
+        for s in sales:
+            sale_lines = SaleLine.search([('sale','=', s.id)])
+            for s_l in sale_lines:
+                s_lines.append(s_l)
+
+        print "Lineas ", s_lines
+        for s in s_lines:
+            print "La venta ",s.product.customer_taxes
+        localcontext['fecha'] = fecha
+        localcontext['lines'] = s_lines
+        localcontext['company'] = company
+        localcontext['fecha_im'] =  fecha_im
+
+        return super(TotalAnaliticCost, cls).parse(report, objects, data,
+            localcontext)
+
+class OpenTotalSale(ModelView):
+    'Open Total Sale'
+    __name__ = 'nodux_account_ec.print_total_sale.start'
+    fecha = fields.Date('Fecha de ventas', help='Fecha para asiento de ventas')
+    company = fields.Many2One('company.company', 'Company', required=True)
+
+    @staticmethod
+    def default_company():
+        return Transaction().context.get('company')
+
+    @staticmethod
+    def default_fecha():
+        Date = Pool().get('ir.date')
+        date = Date.today()
+        return date
+
+class TotalSale(Wizard):
+    'Total Sale'
+    __name__ = 'nodux_account_ec.print_total_sale'
+
+    start = StateView('nodux_account_ec.print_total_sale.start',
+        'nodux_account_ec.print_total_sale_start_view_form', [
+            Button('Cancel', 'end', 'tryton-cancel'),
+            Button('Print', 'print_', 'tryton-ok', default=True),
+            ])
+    print_ = StateAction('nodux_account_ec.report_total_sale')
+
+    def do_print_(self, action):
+        if self.start.fecha:
+            fecha = self.start.fecha
+        if self.start.company:
+            company = self.start.company
+
+        data = {
+            'fecha': fecha,
+            'company': company.id,
+            }
+        return action, data
+
+    def transition_print_(self):
+        return 'end'
+
+class TotalSaleReport(Report):
+    'Total Sale Report'
+    __name__ = 'nodux_account_ec.total_sale'
+
+    @classmethod
+    def parse(cls, report, objects, data, localcontext):
+        pool = Pool()
+        Company = pool.get('company.company')
+        Move = pool.get('account.move')
+        MoveLine = pool.get('account.move.line')
+        fecha = data['fecha']
+        company = Company(data['company'])
+        Invoice = pool.get('account.invoice')
+        InvoiceLine = pool.get('account.invoice.line')
+        Sale = pool.get('sale.sale')
+        Account = pool.get('account.account')
+
+        if company.timezone:
+            timezone = pytz.timezone(company.timezone)
+            Date = Pool().get('ir.date')
+            date = datetime.today()
+            dt = date
+            fecha_im = datetime.astimezone(dt.replace(tzinfo=pytz.utc), timezone)
+
+        print "Lo que tiene el mes ", fecha_im.strftime('%m')
+        if (fecha_im.strftime('%m')) == '01':
+            mes= 'Enero'
+        elif (fecha_im.strftime('%m')) == '02':
+            mes= 'Febrero'
+        elif (fecha_im.strftime('%m')) == '03':
+            mes= 'Marzo'
+        elif (fecha_im.strftime('%m')) == '04':
+            mes= 'Abril'
+        elif (fecha_im.strftime('%m')) == '05':
+            mes= 'Mayo'
+        elif (fecha_im.strftime('%m')) == '06':
+            mes= 'Junio'
+        elif (fecha_im.strftime('%m')) == '07':
+            mes= 'Julio'
+        elif (fecha_im.strftime('%m')) == '08':
+            mes= 'Agosto'
+        elif (fecha_im.strftime('%m')) == '09':
+            mes= 'Septiembre'
+        elif (fecha_im.strftime('%m')) == '10':
+            mes= 'Octubre'
+        elif (fecha_im.strftime('%m')) == '11':
+            mes= 'Noviembre'
+        elif (fecha_im.strftime('%m')) == '12':
+            mes= 'Diciembre'
+
+        invoices = Invoice.search([('invoice_date', '=', fecha)])
+        i_lines = []
+        t_lines = []
+        _0_lines = []
+        _12_lines = []
+        cuenta = ''
+        codigo = ''
+        total_debit = Decimal(0.0)
+        total_credit = Decimal(0.0)
+        total_amount_12 = Decimal(0.0)
+        total_amount_0 = Decimal(0.0)
+        total_taxes = Decimal(0.0)
+        impuesto = Decimal(0.0)
+        account_12 = Account.search([('name', '=', 'VENTA DE BIENES')])
+        account_0 = Account.search([('name', '=', 'VENTA DE BIENES')])
+        account_taxes = Account.search([('name', '=', 'IVA VENTAS LOCALES (EXCLUYE ACTIVOS FIJOS) GRAVADAS TARIFA 12%')])
+
+        for i in invoices:
+            amount = Decimal(0.0)
+            invoices_lines = InvoiceLine.search([('invoice','=', i.id)])
+            if i.state == 'paid':
+                moves = Move.search([('id', '=', i.move.id)])
+                for m in moves:
+                    move_lines = MoveLine.search([('description', '=', i.description), ('reconciliation', '=', None)])
+                    for mv_lr in move_lines:
+                        cuenta = mv_lr.account.name
+                        codigo = mv_lr.account.code
+                    move_lines_taxes = MoveLine.search([('party', '=', i.party.id), ('reconciliation', '=', None)])
+                    for mv_lr_t in move_lines_taxes:
+                        #cuenta_impuesto = mv_lr_t.account.name
+                        #codigo_impuesto = mv_lr_t.account.code
+                        impuesto = impuesto + mv_lr_t.credit
+
+            if i.state != 'paid':
+                moves = Move.search([('id', '=', i.move.id)])
+                for m in moves:
+                    move_lines = MoveLine.search([('description', '=', i.description)])
+                    for mv_lr in move_lines:
+                        cuenta = mv_lr.account.name
+                        codigo = mv_lr.account.code
+                    move_lines_taxes = MoveLine.search([('party', '=', i.party.id), ('reconciliation', '=', None)])
+                    for mv_lr_t in move_lines_taxes:
+                        #cuenta_impuesto = mv_lr_t.account.name
+                        #codigo_impuesto = mv_lr_t.account.code
+                        impuesto = impuesto + mv_lr_t.credit
+
+            sale = Sale.search([('reference', '=', i.description)])
+            for s in sale:
+                total = s.total_amount
+                amount = s.untaxed_amount
+                if s.tax_amount_cache > Decimal(0.0):
+                    total_amount_12 = total_amount_12 + amount
+                else:
+                    total_amount_0 = total_amount_0 + amount
+                total_taxes = total_taxes + s.tax_amount_cache
+                total_debit = total_debit + total
+
+            i_lines.append({
+                'codigo': codigo,
+                'cuenta': cuenta,
+                'tipo': 'Fac',
+                'numero_doc': i.number,
+                'debito': total,
+                'cliente': i.party,
+            })
+
+        for c_12 in account_12:
+            codigo_12 = c_12.code
+            cuenta_12 = c_12.name
+
+        for c_0 in account_0:
+            codigo_0 = c_0.code
+            cuenta_0 = c_0.name
+
+        for c_t in account_taxes:
+            codigo_impuesto = c_t.code
+            cuenta_impuesto = c_t.name
+
+        t_lines.append({
+            'codigo': codigo_impuesto,
+            'cuenta': cuenta_impuesto,
+            'tipo': 'Fac',
+            'credito': total_taxes,
+        })
+        _12_lines.append({
+            'codigo': codigo_12,
+            'cuenta': cuenta_12,
+            'tipo': 'Fac',
+            'credito': total_amount_12,
+        })
+        _0_lines.append({
+            'codigo': codigo_0,
+            'cuenta': cuenta_0,
+            'tipo': 'Fac',
+            'credito': total_amount_0,
+        })
+
+        total_credit = total_taxes + total_amount_0 + total_amount_12
+
+        localcontext['total_debit'] = total_debit
+        localcontext['total_credit'] = total_credit
+        localcontext['fecha'] = fecha
+        localcontext['mes'] = mes
+        localcontext['lines'] = i_lines
+        localcontext['company'] = company
+        localcontext['fecha_im'] =  fecha_im
+        localcontext['lines_t'] = t_lines
+        localcontext['lines_12'] = _12_lines
+        localcontext['lines_0'] = _0_lines
+
+        return super(TotalSaleReport, cls).parse(report, objects, data,
             localcontext)

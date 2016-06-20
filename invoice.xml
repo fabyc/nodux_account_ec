@@ -10,5 +10,18 @@ this repository contains the full copyright notices and license terms. -->
             <field name="report">nodux_account_ec/invoice.odt</field>
             <field name="style"></field>
         </record>
+        <record model="res.group" id="group_sale_return">
+            <field name="name">Nodux - Devolucion venta</field>
+        </record>
+        <record model="res.user-res.group"
+            id="user_admin_group_sale_return">
+            <field name="user" ref="res.user_admin"/>
+            <field name="group" ref="group_sale_return"/>
+        </record>
+        <record model="res.user-res.group"
+            id="user_trigger_group_sale_return">
+            <field name="user" ref="res.user_admin"/>
+            <field name="group" ref="group_sale_return"/>
+        </record>
     </data>
 </tryton>

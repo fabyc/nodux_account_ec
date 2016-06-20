@@ -26,7 +26,9 @@ def register():
         OpenAgedBalanceStart,
         Template,
         Invoice,
+        OpenCostAnalitic,
         #Product,
+        OpenTotalSale,
         module='nodux_account_ec', type_='model')
     Pool.register(
         AuxiliaryBook,
@@ -41,6 +43,8 @@ def register():
         AgedBalance,
         CashFlowStatement,
         InvoiceReport,
+        TotalAnaliticCost,
+        TotalSaleReport,
         module='nodux_account_ec', type_='report')
     Pool.register(
         PrintAuxiliaryBook,
@@ -51,4 +55,6 @@ def register():
         PrintPartyWithholding,
         #PrintTaxesByPeriod,
         OpenAgedBalance,
+        OpenAnalitic,
+        TotalSale,
         module='nodux_account_ec', type_='wizard')

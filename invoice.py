@@ -44,9 +44,14 @@ class InvoiceReport(Report):
         pool = Pool()
         User = pool.get('res.user')
         Invoice = pool.get('account.invoice')
-        Sale = pool.get('sale.sale')
+        Module = pool.get('ir.module.module')
+        module = None
+        sale = None 
+        module = Module.search([('name', '=', 'sale.sale'), ('state', '=', 'installed')])
         invoice = records[0]
-        sale = Sale.search([('reference','=', invoice.description)])
+        if module:
+            Sale = pool.get('sale.sale')
+            sale = Sale.search([('reference','=', invoice.description)])
         TermLines = pool.get('account.invoice.payment_term.line')
         cont = 0
         if invoice.total_amount:

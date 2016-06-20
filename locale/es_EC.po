@@ -194,18 +194,6 @@ msgctxt "field:account.print_trial_balance.start,accounts_with_balance:"
 msgid "Accounts with Balance"
 msgstr "Cuentas con balance"
 
-msgctxt "field:nodux_account_ec.print_ats.start,fiscalyear:"
-msgid "Fiscal Year"
-msgstr "Año Fiscal"
-
-msgctxt "field:nodux_account_ec.print_ats.start,id:"
-msgid "ID"
-msgstr "ID"
-
-msgctxt "field:nodux_account_ec.print_ats.start,periods:"
-msgid "Periods"
-msgstr "Períodos"
-
 msgctxt "field:nodux_account_ec.print_auxiliary_book.start,company:"
 msgid "Company"
 msgstr "Empresa"
@@ -278,6 +266,30 @@ msgctxt "field:nodux_account_ec.print_auxiliary_party.start,start_period:"
 msgid "Start Period"
 msgstr "Período inicial"
 
+msgctxt "field:nodux_account_ec.print_cost_analitic.start,company:"
+msgid "Company"
+msgstr "Empresa"
+
+msgctxt "field:nodux_account_ec.print_cost_analitic.start,fecha:"
+msgid "Fecha de ventas"
+msgstr ""
+
+msgctxt "field:nodux_account_ec.print_cost_analitic.start,id:"
+msgid "ID"
+msgstr "ID"
+
+msgctxt "field:nodux_account_ec.print_total_sale.start,company:"
+msgid "Company"
+msgstr "Empresa"
+
+msgctxt "field:nodux_account_ec.print_total_sale.start,fecha:"
+msgid "Fecha de ventas"
+msgstr ""
+
+msgctxt "field:nodux_account_ec.print_total_sale.start,id:"
+msgid "ID"
+msgstr "ID"
+
 msgctxt "field:nodux_account_ec.print_trial_balance_detailed.start,company:"
 msgid "Company"
 msgstr "Empresa"
@@ -314,13 +326,21 @@ msgctxt ""
 msgid "Start Period"
 msgstr "Período inicial"
 
+msgctxt "field:party.party,contribuyente_especial:"
+msgid "Contribuyente especial"
+msgstr ""
+
+msgctxt "field:party.party,contribuyente_especial_nro:"
+msgid "Nro. Resolucion"
+msgstr "No. resolución"
+
+msgctxt "field:party.party,mandatory_accounting:"
+msgid "Mandatory Accounting"
+msgstr "Obligado contabilidad"
+
 msgctxt "field:party.party,type_document:"
 msgid "Type Document"
 msgstr "Tipo de documento"
-
-msgctxt "field:party.party,type_party:"
-msgid "Type Party"
-msgstr "Tipo de Tercero"
 
 msgctxt "help:account.account.cashflow,sequence:"
 msgid "Use to order the account cashflow"
@@ -333,10 +353,6 @@ msgstr "Muestra sólo asientos contabilizados"
 msgctxt "help:account.print_trial_balance.start,accounts_with_balance:"
 msgid "Show accounts with balances in previous periods"
 msgstr "Mostrar cuentas con balances en períodos anteriores"
-
-msgctxt "help:nodux_account_ec.print_ats.start,periods:"
-msgid "Leave empty for all periods of fiscal year"
-msgstr "Dejar vacío para todos los períodos del año fiscal"
 
 msgctxt "help:nodux_account_ec.print_auxiliary_book.start,empty_account:"
 msgid "With account without move"
@@ -354,6 +370,14 @@ msgctxt "help:nodux_account_ec.print_auxiliary_party.start,posted:"
 msgid "Show only posted move"
 msgstr "Muestra sólo asientos contabilizados"
 
+msgctxt "help:nodux_account_ec.print_cost_analitic.start,fecha:"
+msgid "Fecha para analitico de costo de ventas"
+msgstr ""
+
+msgctxt "help:nodux_account_ec.print_total_sale.start,fecha:"
+msgid "Fecha para asiento de ventas"
+msgstr ""
+
 msgctxt ""
 "help:nodux_account_ec.print_trial_balance_detailed.start,empty_account:"
 msgid "With account without move"
@@ -362,6 +386,14 @@ msgstr "Con cuenta sin asiento"
 msgctxt "help:nodux_account_ec.print_trial_balance_detailed.start,posted:"
 msgid "Show only posted move"
 msgstr "Muestra sólo asientos contabilizados"
+
+msgctxt "help:party.party,contribuyente_especial:"
+msgid "Seleccione solo si es contribuyente especial"
+msgstr ""
+
+msgctxt "help:party.party,contribuyente_especial_nro:"
+msgid "Contribuyente Especial Nro."
+msgstr "Contribuyente especial No."
 
 msgctxt "model:account.account.cashflow,name:"
 msgid "Account Cashflow"
@@ -381,7 +413,7 @@ msgstr "Retención de Tercero - Iniciar"
 
 msgctxt "model:ir.action,name:"
 msgid "Invoice Force Draw"
-msgstr "Forzar factura a borrador"
+msgstr "Imprimir ATS"
 
 msgctxt "model:ir.action,name:act_account_cashflow_list"
 msgid "Account Cashflows"
@@ -399,10 +431,6 @@ msgctxt "model:ir.action,name:act_account_cashflow_tree"
 msgid "Account Cashflows"
 msgstr "Cuentas de flujo de efectivo"
 
-msgctxt "model:ir.action,name:report_ats"
-msgid "ATS"
-msgstr "ATS"
-
 msgctxt "model:ir.action,name:report_auxiliary_book"
 msgid "Auxiliary Book"
 msgstr "Libro auxiliar"
@@ -415,6 +443,10 @@ msgctxt "model:ir.action,name:report_balance_sheet"
 msgid "Balance Sheet"
 msgstr "Estado de Situación Financiera"
 
+msgctxt "model:ir.action,name:report_cost_analitic"
+msgid "Imprimir analitico de costos de venta"
+msgstr ""
+
 msgctxt "model:ir.action,name:report_income_statement"
 msgid "Income Statement"
 msgstr "Estado del Resultado Integral"
@@ -422,6 +454,10 @@ msgstr "Estado del Resultado Integral"
 msgctxt "model:ir.action,name:report_portfolio_party_detailed"
 msgid "Portfolio by Party Detailed"
 msgstr "Portafolio por Tercero detallado"
+
+msgctxt "model:ir.action,name:report_total_sale"
+msgid "Imprimir analitico de costos de venta"
+msgstr ""
 
 msgctxt "model:ir.action,name:report_trial_balance_detailed"
 msgid "Trial Balance Detailed"
@@ -431,10 +467,6 @@ msgctxt "model:ir.action,name:wizard_open_cashflow_statement"
 msgid "Open Cash Flow State"
 msgstr "Abrir estado de flujo de efectivo"
 
-msgctxt "model:ir.action,name:wizard_print_ats"
-msgid "Print ATS"
-msgstr "Imprimir ATS"
-
 msgctxt "model:ir.action,name:wizard_print_auxiliary_book"
 msgid "Print Auxiliary Book"
 msgstr "Imprimir libro auxiliar"
@@ -443,9 +475,21 @@ msgctxt "model:ir.action,name:wizard_print_auxiliary_party"
 msgid "Print Auxiliary Party"
 msgstr "Imprimir auxiliar por Tercero"
 
+msgctxt "model:ir.action,name:wizard_print_cost_analitic"
+msgid "Imprimir analitico de costos de Ventas"
+msgstr ""
+
+msgctxt "model:ir.action,name:wizard_print_total_sale"
+msgid "Imprimir ventas"
+msgstr ""
+
 msgctxt "model:ir.action,name:wizard_trial_balance_detailed"
 msgid "Trial Balance Detailed"
 msgstr "Balance de comprobación detallado"
+
+msgctxt "model:ir.ui.menu,name:"
+msgid "Print ATS"
+msgstr "Imprimir ATS"
 
 msgctxt "model:ir.ui.menu,name:menu_account_cashflow_list"
 msgid "Account Cashflows"
@@ -463,10 +507,6 @@ msgctxt "model:ir.ui.menu,name:menu_open_cashflow_statement"
 msgid "Cash Flow State"
 msgstr "Estado de Flujo de Efectivo"
 
-msgctxt "model:ir.ui.menu,name:menu_print_ats"
-msgid "Print ATS"
-msgstr "Imprimir ATS"
-
 msgctxt "model:ir.ui.menu,name:menu_print_auxiliary_book"
 msgid "Print Auxiliary Book"
 msgstr "Imprimir Libro Auxiliar"
@@ -475,13 +515,17 @@ msgctxt "model:ir.ui.menu,name:menu_print_auxiliary_party"
 msgid "Print Auxiliary Party"
 msgstr "Imprimir Auxiliar por Tercero"
 
+msgctxt "model:ir.ui.menu,name:menu_print_cost_analitic"
+msgid "Imprimir analitico de costos de Ventas"
+msgstr ""
+
+msgctxt "model:ir.ui.menu,name:menu_print_total_sale"
+msgid "Imprimir ventas"
+msgstr ""
+
 msgctxt "model:ir.ui.menu,name:menu_trial_balance_detailed"
 msgid "Trial Balance Detailed"
 msgstr "Balance de comprobación detallado"
-
-msgctxt "model:nodux_account_ec.print_ats.start,name:"
-msgid "Print ATS"
-msgstr "Imprimir ATS"
 
 msgctxt "model:nodux_account_ec.print_auxiliary_book.start,name:"
 msgid "Auxiliary Book Start"
@@ -491,9 +535,21 @@ msgctxt "model:nodux_account_ec.print_auxiliary_party.start,name:"
 msgid "Auxiliary Party Start"
 msgstr "Auxiliar por Tercero - Iniciar"
 
+msgctxt "model:nodux_account_ec.print_cost_analitic.start,name:"
+msgid "Open Cost Analitic"
+msgstr ""
+
+msgctxt "model:nodux_account_ec.print_total_sale.start,name:"
+msgid "Open Total Sale"
+msgstr ""
+
 msgctxt "model:nodux_account_ec.print_trial_balance_detailed.start,name:"
 msgid "Print Trial Balance Detailed"
 msgstr "Imprimir balance de comprobación"
+
+msgctxt "model:res.group,name:group_sale_return"
+msgid "Nodux - Devolucion venta"
+msgstr ""
 
 msgctxt "odt:account.auxiliary_book:"
 msgid "$"
@@ -509,7 +565,7 @@ msgstr ")"
 
 msgctxt "odt:account.auxiliary_book:"
 msgid "-"
-msgstr ""
+msgstr "-"
 
 msgctxt "odt:account.auxiliary_book:"
 msgid ".:"
@@ -740,6 +796,10 @@ msgid "/"
 msgstr "/"
 
 msgctxt "odt:account.balance_sheet:"
+msgid "6"
+msgstr ""
+
+msgctxt "odt:account.balance_sheet:"
 msgid ":"
 msgstr ":"
 
@@ -748,12 +808,20 @@ msgid "A LA"
 msgstr "A LA"
 
 msgctxt "odt:account.balance_sheet:"
-msgid "EMPRESA"
-msgstr "EMPRESA"
+msgid "AÑO 201"
+msgstr ""
 
 msgctxt "odt:account.balance_sheet:"
-msgid "ESTADO DE SITUACION FINANCIERA"
-msgstr "ESTADO DE SITUACION FINANCIERA"
+msgid "Cuenta"
+msgstr ""
+
+msgctxt "odt:account.balance_sheet:"
+msgid "Código"
+msgstr ""
+
+msgctxt "odt:account.balance_sheet:"
+msgid "ESTADO DE SITUACI"
+msgstr ""
 
 msgctxt "odt:account.balance_sheet:"
 msgid "FECHA"
@@ -764,8 +832,16 @@ msgid "FECHA DE IMPRESIÓN:"
 msgstr "FECHA DE IMPRESIÓN:"
 
 msgctxt "odt:account.balance_sheet:"
-msgid "Nodux Cía.Ltda"
-msgstr "Nodux Cía. Ltda."
+msgid "N FINANCIERA"
+msgstr ""
+
+msgctxt "odt:account.balance_sheet:"
+msgid "Nodux Cía. Ltda."
+msgstr ""
+
+msgctxt "odt:account.balance_sheet:"
+msgid "TOTAL"
+msgstr "TOTAL"
 
 msgctxt "odt:account.balance_sheet:"
 msgid "[ PAG."
@@ -774,6 +850,10 @@ msgstr "[ PAG."
 msgctxt "odt:account.balance_sheet:"
 msgid "]"
 msgstr "]"
+
+msgctxt "odt:account.balance_sheet:"
+msgid "Ó"
+msgstr ""
 
 msgctxt "odt:account.income_statement:"
 msgid "$"
@@ -792,20 +872,12 @@ msgid "/"
 msgstr "/"
 
 msgctxt "odt:account.income_statement:"
-msgid ":"
-msgstr ":"
+msgid "Cuenta"
+msgstr ""
 
 msgctxt "odt:account.income_statement:"
-msgid "ANALISIS"
-msgstr "ANALISIS"
-
-msgctxt "odt:account.income_statement:"
-msgid "DESCRIPCION"
-msgstr "DESCRIPCION"
-
-msgctxt "odt:account.income_statement:"
-msgid "EMPRESA"
-msgstr "EMPRESA"
+msgid "Código"
+msgstr ""
 
 msgctxt "odt:account.income_statement:"
 msgid "ESTADO DE RESULTADO"
@@ -816,24 +888,12 @@ msgid "FECHA DE IMPRESIÓN:"
 msgstr "FECHA DE IMPRESIÓN:"
 
 msgctxt "odt:account.income_statement:"
-msgid "INTEGRAL"
-msgstr "INTEGRAL"
+msgid "Nodux Cía. Ltda."
+msgstr ""
 
 msgctxt "odt:account.income_statement:"
-msgid "Nodux Cia.Ltda."
-msgstr "Nodux Cía. Ltda."
-
-msgctxt "odt:account.income_statement:"
-msgid "PERIODO FINAL"
-msgstr "PERIODO FINAL"
-
-msgctxt "odt:account.income_statement:"
-msgid "PERIODO INICIAL"
-msgstr "PERIODO INICIAL"
-
-msgctxt "odt:account.income_statement:"
-msgid "VERTICAL"
-msgstr "VERTICAL"
+msgid "Saldo"
+msgstr ""
 
 msgctxt "odt:account.income_statement:"
 msgid "[ PAG."
@@ -842,6 +902,158 @@ msgstr "[ PAG."
 msgctxt "odt:account.income_statement:"
 msgid "]"
 msgstr "]"
+
+msgctxt "odt:nodux_account_ec.cost_analitic:"
+msgid "%"
+msgstr "%"
+
+msgctxt "odt:nodux_account_ec.cost_analitic:"
+msgid "."
+msgstr ""
+
+msgctxt "odt:nodux_account_ec.cost_analitic:"
+msgid "/"
+msgstr "/"
+
+msgctxt "odt:nodux_account_ec.cost_analitic:"
+msgid ":"
+msgstr ":"
+
+msgctxt "odt:nodux_account_ec.cost_analitic:"
+msgid "A"
+msgstr ""
+
+msgctxt "odt:nodux_account_ec.cost_analitic:"
+msgid "Costo"
+msgstr ""
+
+msgctxt "odt:nodux_account_ec.cost_analitic:"
+msgid "Costo 0%"
+msgstr ""
+
+msgctxt "odt:nodux_account_ec.cost_analitic:"
+msgid "Desde:"
+msgstr ""
+
+msgctxt "odt:nodux_account_ec.cost_analitic:"
+msgid "Diferencia"
+msgstr ""
+
+msgctxt "odt:nodux_account_ec.cost_analitic:"
+msgid "Hasta"
+msgstr ""
+
+msgctxt "odt:nodux_account_ec.cost_analitic:"
+msgid "IMPRESO"
+msgstr ""
+
+msgctxt "odt:nodux_account_ec.cost_analitic:"
+msgid "Item"
+msgstr ""
+
+msgctxt "odt:nodux_account_ec.cost_analitic:"
+msgid "NEXO DE COSTO DE VENTA"
+msgstr ""
+
+msgctxt "odt:nodux_account_ec.cost_analitic:"
+msgid "Nodux Cía. Ltda.: (07) 2 560215 – 0999323367 – hola@nodux.ec"
+msgstr ""
+
+msgctxt "odt:nodux_account_ec.cost_analitic:"
+msgid "Utilidad"
+msgstr ""
+
+msgctxt "odt:nodux_account_ec.cost_analitic:"
+msgid "V"
+msgstr ""
+
+msgctxt "odt:nodux_account_ec.cost_analitic:"
+msgid "Venta"
+msgstr "Venta"
+
+msgctxt "odt:nodux_account_ec.cost_analitic:"
+msgid "Venta 0%"
+msgstr ""
+
+msgctxt "odt:nodux_account_ec.cost_analitic:"
+msgid "enta"
+msgstr ""
+
+msgctxt "odt:nodux_account_ec.total_sale:"
+msgid "-"
+msgstr "-"
+
+msgctxt "odt:nodux_account_ec.total_sale:"
+msgid "/"
+msgstr "/"
+
+msgctxt "odt:nodux_account_ec.total_sale:"
+msgid "00"
+msgstr ""
+
+msgctxt "odt:nodux_account_ec.total_sale:"
+msgid ":"
+msgstr ":"
+
+msgctxt "odt:nodux_account_ec.total_sale:"
+msgid "Asiento No."
+msgstr ""
+
+msgctxt "odt:nodux_account_ec.total_sale:"
+msgid "Codigo"
+msgstr ""
+
+msgctxt "odt:nodux_account_ec.total_sale:"
+msgid "Crédito"
+msgstr ""
+
+msgctxt "odt:nodux_account_ec.total_sale:"
+msgid "Cuenta"
+msgstr ""
+
+msgctxt "odt:nodux_account_ec.total_sale:"
+msgid "Débito"
+msgstr ""
+
+msgctxt "odt:nodux_account_ec.total_sale:"
+msgid "IMPRESO"
+msgstr ""
+
+msgctxt "odt:nodux_account_ec.total_sale:"
+msgid "Loja,"
+msgstr ""
+
+msgctxt "odt:nodux_account_ec.total_sale:"
+msgid "Lugar y fecha:"
+msgstr ""
+
+msgctxt "odt:nodux_account_ec.total_sale:"
+msgid "No. Doc"
+msgstr ""
+
+msgctxt "odt:nodux_account_ec.total_sale:"
+msgid "Nodux Cía. Ltda.: (07) 2 560215 – 0999323367 – hola@nodux.ec"
+msgstr ""
+
+msgctxt "odt:nodux_account_ec.total_sale:"
+msgid "Nota"
+msgstr ""
+
+msgctxt "odt:nodux_account_ec.total_sale:"
+msgid "Tipo"
+msgstr ""
+
+msgctxt "odt:nodux_account_ec.total_sale:"
+msgid "Totales $"
+msgstr ""
+
+msgctxt "odt:nodux_account_ec.total_sale:"
+msgid "Ventas:"
+msgstr ""
+
+msgctxt "odt:nodux_account_ec.total_sale:"
+msgid "de"
+msgstr ""
 
 msgctxt "odt:nodux_account_ec.trial_balance_detailed:"
 msgid "$"
@@ -1135,6 +1347,18 @@ msgctxt "selection:bank.account.number,type:"
 msgid "Saving Account"
 msgstr "Cuenta de ahorros"
 
+msgctxt "selection:party.party,mandatory_accounting:"
+msgid ""
+msgstr ""
+
+msgctxt "selection:party.party,mandatory_accounting:"
+msgid "No"
+msgstr "No"
+
+msgctxt "selection:party.party,mandatory_accounting:"
+msgid "Si"
+msgstr "Si"
+
 msgctxt "selection:party.party,type_document:"
 msgid ""
 msgstr ""
@@ -1154,22 +1378,6 @@ msgstr "Pasaporte"
 msgctxt "selection:party.party,type_document:"
 msgid "RUC"
 msgstr "RUC"
-
-msgctxt "selection:party.party,type_party:"
-msgid ""
-msgstr ""
-
-msgctxt "selection:party.party,type_party:"
-msgid "Entidad Publica"
-msgstr "Entidad pública"
-
-msgctxt "selection:party.party,type_party:"
-msgid "Persona Juridica"
-msgstr "Persona juridica"
-
-msgctxt "selection:party.party,type_party:"
-msgid "Persona Natural"
-msgstr "Persona natural"
 
 msgctxt "view:account.account.cashflow.template:"
 msgid "Account Cashflow Template"
@@ -1191,10 +1399,6 @@ msgctxt "view:account.open_cashflow_statement.start:"
 msgid "Open Cash Flow State"
 msgstr "Abrir estado de flujo de efectivo"
 
-msgctxt "view:nodux_account_ec.print_ats.start:"
-msgid "Print ATS"
-msgstr "Imprimir ATS"
-
 msgctxt "view:nodux_account_ec.print_auxiliary_book.start:"
 msgid "Print Auxiliary Book"
 msgstr "Imprimir libro auxiliar"
@@ -1202,6 +1406,14 @@ msgstr "Imprimir libro auxiliar"
 msgctxt "view:nodux_account_ec.print_auxiliary_party.start:"
 msgid "Print Auxiliary Party"
 msgstr "Imprimir auxiliar por tercero"
+
+msgctxt "view:nodux_account_ec.print_cost_analitic.start:"
+msgid "Analitico de costo de ventas"
+msgstr ""
+
+msgctxt "view:nodux_account_ec.print_total_sale.start:"
+msgid "Analitico de costo de ventas"
+msgstr "Análitico de costo de ventas"
 
 msgctxt "view:nodux_account_ec.print_trial_balance_detailed.start:"
 msgid "Print Trial Balance"
@@ -1227,14 +1439,6 @@ msgctxt "wizard_button:account.print_party_withholding,start,print_:"
 msgid "Ok"
 msgstr "Aceptar"
 
-msgctxt "wizard_button:nodux_account_ec.print_ats,start,end:"
-msgid "Cancel"
-msgstr "Cancelar"
-
-msgctxt "wizard_button:nodux_account_ec.print_ats,start,print_:"
-msgid "Print"
-msgstr "Imprimir"
-
 msgctxt "wizard_button:nodux_account_ec.print_auxiliary_book,start,end:"
 msgid "Cancel"
 msgstr "Cancelar"
@@ -1248,6 +1452,22 @@ msgid "Cancel"
 msgstr "Cancelar"
 
 msgctxt "wizard_button:nodux_account_ec.print_auxiliary_party,start,print_:"
+msgid "Print"
+msgstr "Imprimir"
+
+msgctxt "wizard_button:nodux_account_ec.print_cost_analitic,start,end:"
+msgid "Cancel"
+msgstr "Cancelar"
+
+msgctxt "wizard_button:nodux_account_ec.print_cost_analitic,start,print_:"
+msgid "Print"
+msgstr "Imprimir"
+
+msgctxt "wizard_button:nodux_account_ec.print_total_sale,start,end:"
+msgid "Cancel"
+msgstr "Cancelar"
+
+msgctxt "wizard_button:nodux_account_ec.print_total_sale,start,print_:"
 msgid "Print"
 msgstr "Imprimir"
 

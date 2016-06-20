@@ -3,6 +3,50 @@
 this repository contains the full copyright notices and license terms. -->
 <tryton>
     <data>
+        <!--Analitic -->
+        <record model="ir.ui.view" id="print_cost_analitic_start_view_form">
+            <field name="model">nodux_account_ec.print_cost_analitic.start</field>
+            <field name="type">form</field>
+            <field name="name">print_cost_analitic_start_form</field>
+        </record>
+
+        <record model="ir.action.wizard" id="wizard_print_cost_analitic">
+            <field name="name">Imprimir analitico de costos de Ventas</field>
+            <field name="wiz_name">nodux_account_ec.print_cost_analitic</field>
+        </record>
+
+        <menuitem parent="account.menu_reporting" action="wizard_print_cost_analitic"
+            id="menu_print_cost_analitic" icon="tryton-print"/>
+
+        <record model="ir.action.report" id="report_cost_analitic">
+            <field name="name">Imprimir analitico de costos de venta</field>
+            <field name="model"></field>
+            <field name="report_name">nodux_account_ec.cost_analitic</field>
+            <field name="report">nodux_account_ec/analitico_costos.odt</field>
+        </record>
+
+        <!--Sale total -->
+        <record model="ir.ui.view" id="print_total_sale_start_view_form">
+            <field name="model">nodux_account_ec.print_total_sale.start</field>
+            <field name="type">form</field>
+            <field name="name">print_total_sale_start_form</field>
+        </record>
+
+        <record model="ir.action.wizard" id="wizard_print_total_sale">
+            <field name="name">Imprimir ventas</field>
+            <field name="wiz_name">nodux_account_ec.print_total_sale</field>
+        </record>
+
+        <menuitem parent="account.menu_reporting" action="wizard_print_total_sale"
+            id="menu_print_total_sale" icon="tryton-print"/>
+
+        <record model="ir.action.report" id="report_total_sale">
+            <field name="name">Imprimir analitico de costos de venta</field>
+            <field name="model"></field>
+            <field name="report_name">nodux_account_ec.total_sale</field>
+            <field name="report">nodux_account_ec/total_sale.odt</field>
+        </record>
+
         <!-- Balance Trial Detailed -->
         <record model="ir.ui.view" id="print_trial_balance_detailed_start_view_form">
             <field name="model">nodux_account_ec.print_trial_balance_detailed.start</field>
@@ -244,20 +288,20 @@ this repository contains the full copyright notices and license terms. -->
             <field name="perm_create" eval="True"/>
             <field name="perm_delete" eval="True"/>
         </record>
-        
+
         <!--Ocultar menu regla de impuestos -->
         <record model="ir.ui.menu" id="account.menu_tax_rule_template_form">
             <field name="active" eval="False"/>
         </record>
-        
+
         <record model="ir.ui.menu" id="account.menu_tax_rule_form">
             <field name="active" eval="False"/>
         </record>
-        
+
         <!--Ocultar menu vistas de libro diario-->
         <record model="ir.ui.menu" id="account.menu_journal_view_form">
             <field name="active" eval="False"/>
         </record>
-        
+
     </data>
 </tryton>
