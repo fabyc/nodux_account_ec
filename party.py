@@ -8,7 +8,6 @@ from trytond.pyson import Id
 from trytond.pyson import Bool, Eval
 
 __all__ = ['Party', 'BankAccountNumber', 'Company']
-__metaclass__ = PoolMeta
 
 STATES = {
     'readonly': ~Eval('active', True),
@@ -17,8 +16,9 @@ STATES = {
 DEPENDS = ['active']
 
 class Party:
+    __metaclass__ = PoolMeta
     __name__ = 'party.party'
-    
+
     mandatory_accounting = fields.Selection([
             ('',''),
             ('SI', 'Si'),
@@ -26,16 +26,16 @@ class Party:
             ], 'Mandatory Accounting', states={
                 'invisible': Eval('type_document')!='04',
             }
-            )  
+            )
     contribuyente_especial = fields.Boolean(u'Contribuyente especial', states={
             'invisible': Eval('mandatory_accounting') != 'SI',
             }, help="Seleccione solo si es contribuyente especial"
-        )        
+        )
     contribuyente_especial_nro = fields.Char('Nro. Resolucion', states={
             'invisible': ~Eval('contribuyente_especial',True),
             'required': Eval('contribuyente_especial',True),
             }, help="Contribuyente Especial Nro.")
-    
+
     type_document = fields.Selection([
                 ('', ''),
                 ('04', 'RUC'),
@@ -45,8 +45,9 @@ class Party:
             ], 'Type Document', states={
                 'readonly': ~Eval('active', True),
             },  depends=['active'])
-    
+
 class BankAccountNumber:
+    __metaclass__ = PoolMeta
     __name__ = 'bank.account.number'
 
     @classmethod
@@ -60,14 +61,15 @@ class BankAccountNumber:
             cls.type.selection.extend(new_sel)
 
 class Company:
+    __metaclass__ = PoolMeta
     __name__ = 'company.company'
-        
+
     @classmethod
     def default_currency(cls):
         Currency = Pool().get('currency.currency')
-        usd= Currency.search([('code','=','USD')])        
+        usd= Currency.search([('code','=','USD')])
         return usd[0].id
-            
+
     @staticmethod
     def default_timezone():
         return 'America/Guayaquil'

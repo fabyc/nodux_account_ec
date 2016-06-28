@@ -28,8 +28,6 @@ __all__ = ['AuxiliaryBookStart', 'PrintAuxiliaryBook', 'AuxiliaryBook',
         'AgedBalance','CashFlowStatement', 'TotalAnaliticCost', 'OpenAnalitic',
         'OpenCostAnalitic', 'OpenTotalSale', 'TotalSale', 'TotalSaleReport']
 
-__metaclass__ = PoolMeta
-
 def fmt_acc(val):
     # Format account number function
     fmt = '%s' + '0' * (8 - len(str(val)))
@@ -37,6 +35,7 @@ def fmt_acc(val):
     return account_code_fmt
 
 class Account:
+    __metaclass__ = PoolMeta
     __name__ = 'account.account'
     cashflow = fields.Many2One('account.account.cashflow', 'Cashflow',
         ondelete="RESTRICT", states={
@@ -45,7 +44,6 @@ class Account:
         domain=[
             ('company', '=', Eval('company')),
             ], depends=['kind', 'company'])
-
 
 class AuxiliaryBookStart(ModelView):
     'Auxiliary Book Start'
@@ -73,8 +71,6 @@ class AuxiliaryBookStart(ModelView):
                 ('kind', '!=', 'view'),
                 ('code', '!=', None),
             ])
-    #start_code = fields.Char('Start Code Range')
-    #end_code = fields.Char('End Code Range')
     party = fields.Many2One('party.party', 'Party')
     company = fields.Many2One('company.company', 'Company', required=True)
     posted = fields.Boolean('Posted Move', help='Show only posted move')
@@ -158,6 +154,7 @@ class PrintAuxiliaryBook(Wizard):
 
 
 class AuxiliaryBook(Report):
+    __metaclass__ = PoolMeta
     __name__ = 'account.auxiliary_book'
 
     @classmethod
@@ -333,6 +330,7 @@ class AuxiliaryBook(Report):
 
 
 class PortfolioByPartyDetailed(Report):
+    __metaclass__ = PoolMeta
     __name__ = 'party.portfolio_party_detailed'
 
     @classmethod
@@ -789,6 +787,7 @@ class PrintTrialBalance:
 
 
 class TrialBalance:
+    __metaclass__ = PoolMeta
     __name__ = 'account.trial_balance'
 
     @classmethod
@@ -955,7 +954,14 @@ class CashflowTemplate(ModelSQL, ModelView):
 
     @classmethod
     def __register__(cls, module_name):
+        TableHandler = backend.get('TableHandler')
+        table = TableHandler(cls, module_name)
+
         super(CashflowTemplate, cls).__register__(module_name)
+
+        # Migration from 2.4: drop required on sequence
+        table.not_null_action('sequence', action='remove')
+
 
     @classmethod
     def validate(cls, records):
@@ -965,7 +971,8 @@ class CashflowTemplate(ModelSQL, ModelView):
     @staticmethod
     def order_sequence(tables):
         table, _ = tables[None]
-        return [table.sequence == None, table.sequence]
+        #return [table.sequence == None, table.sequence]
+        return [Case((table.sequence == Null, 0), else_=1), table.sequence]
 
     @staticmethod
     def default_display_balance():
@@ -1081,7 +1088,13 @@ class Cashflow(ModelSQL, ModelView):
 
     @classmethod
     def __register__(cls, module_name):
+        TableHandler = backend.get('TableHandler')
+        table = TableHandler(cls, module_name)
+
         super(Cashflow, cls).__register__(module_name)
+
+        # Migration from 2.4: drop required on sequence
+        table.not_null_action('sequence', action='remove')
 
     @classmethod
     def validate(cls, cashflows):
@@ -1091,7 +1104,7 @@ class Cashflow(ModelSQL, ModelView):
     @staticmethod
     def order_sequence(tables):
         table, _ = tables[None]
-        return [table.sequence == None, table.sequence]
+        return [Case((table.sequence == Null, 0), else_=1), table.sequence]
 
     @staticmethod
     def default_balance_sheet():

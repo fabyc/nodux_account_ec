@@ -8,13 +8,8 @@ from trytond.wizard import Wizard, StateView, StateAction, Button
 from trytond.transaction import Transaction
 from trytond.report import Report
 
-__all__ = ['Tax', 'TaxesByPeriod', 'TaxesByPeriodStart',
+__all__ = ['TaxesByPeriod', 'TaxesByPeriodStart',
         'PrintTaxesByPeriod']
-__metaclass__ = PoolMeta
-
-
-class Tax:
-    __name__ = 'account.tax'
 
 class TaxesByPeriodStart(ModelView):
     'Taxes By Period Start'

@@ -9,7 +9,6 @@ from .product import *
 from .invoice import *
 def register():
     Pool.register(
-        #Tax,
         Party,
         Company,
         BankAccountNumber,

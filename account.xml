@@ -112,6 +112,7 @@ this repository contains the full copyright notices and license terms. -->
 
         <record model="ir.ui.view" id="print_trial_balance_start_view_form">
             <field name="model">account.print_trial_balance.start</field>
+            <field name="type" Eval="None"/>
             <field name="inherit" ref="account.print_trial_balance_start_view_form"/>
             <field name="name">print_trial_balance_start_form</field>
         </record>
@@ -144,6 +145,7 @@ this repository contains the full copyright notices and license terms. -->
 
         <record model="ir.ui.view" id="account_view_form">
             <field name="model">account.account</field>
+            <field name="type" Eval="None"/>
             <field name="inherit" ref="account.account_view_form"/>
             <field name="name">account_form</field>
         </record>
@@ -169,7 +171,7 @@ this repository contains the full copyright notices and license terms. -->
         <record model="ir.action.act_window" id="act_account_cashflow_template_tree">
             <field name="name">Account Cashflow Templates</field>
             <field name="res_model">account.account.cashflow.template</field>
-            <field name="domain">[('parent', '=', None)]</field>
+            <field name="domain" eval="[('parent', '=', None)]" pyson="1"/>
         </record>
         <record model="ir.action.act_window.view"
             id="act_account_cashflow_template_tree_view1">
@@ -209,7 +211,7 @@ this repository contains the full copyright notices and license terms. -->
         <record model="ir.action.act_window" id="act_account_cashflow_tree">
             <field name="name">Account Cashflows</field>
             <field name="res_model">account.account.cashflow</field>
-            <field name="domain">[('parent', '=', None)]</field>
+            <field name="domain" eval="[('parent', '=', None)]" pyson="1"/>
         </record>
         <record model="ir.action.act_window.view" id="act_account_cashflow_tree_view1">
             <field name="sequence" eval="10"/>
@@ -257,7 +259,7 @@ this repository contains the full copyright notices and license terms. -->
         <record model="ir.action.act_window" id="act_account_cashflow_statement_tree">
             <field name="name">CashFlow Statement</field>
             <field name="res_model">account.account.cashflow</field>
-            <field name="domain">[('parent', '=', None)]</field>
+            <field name="domain" eval="[('parent', '=', None)]" pyson="1"/>
         </record>
         <record model="ir.action.act_window.view" id="act_cashflow_statement_view1">
             <field name="sequence" eval="10"/>
