@@ -15,7 +15,7 @@ from trytond.pool import Pool, PoolMeta
 from trytond.modules.company import CompanyReport
 import pytz
 from datetime import datetime,timedelta
-
+import datetime
 __all__ = ['AuxiliaryBookStart', 'PrintAuxiliaryBook', 'AuxiliaryBook',
         'PortfolioByPartyDetailed', 'TrialBalanceDetailed',
         'PrintTrialBalanceDetailed', 'PrintTrialBalanceDetailedStart',
@@ -133,12 +133,15 @@ class PrintAuxiliaryBook(Wizard):
             party = self.start.party.id
 
         start_account_id = None
+        """
         if self.start.start_account:
             start_account_id = self.start.start_account.id
+        """
         end_account_id = None
+        """
         if self.start.end_account:
             end_account_id = self.start.end_account.id
-
+        """
 
         data = {
             'company': self.start.company.id,
@@ -1420,34 +1423,123 @@ class PartyWithholding(CompanyReport):
         return super(PartyWithholding, cls).parse(report, objects, data,
                 localcontext)
 
-class OpenAgedBalanceStart:
+class OpenAgedBalanceStart():
     __name__ = 'account.open_aged_balance.start'
-    employee = fields.Many2One('res.user','Employee', states={
-            'invisible': Eval('balance_type')!= 'customer',
-            }, depends=['balance_type'])
+    employee = fields.Many2One('company.employee','Employee', states={
+            'invisible': Eval('balance_type') != 'customer',
+            })
 
     @classmethod
     def __setup__(cls):
         super(OpenAgedBalanceStart, cls).__setup__()
 
-class OpenAgedBalance:
-    __name__='account._open_aged_balance'
+class OpenAgedBalance():
+    __name__='account.open_aged_balance'
+
+    @classmethod
+    def __setup__(cls):
+        super(OpenAgedBalance, cls).__setup__()
 
     def do_print_(self, action):
+        if not (self.start.term1 < self.start.term2 < self.start.term3):
+            self.raise_user_error(error="warning",
+                error_description="term_overlap_desc")
         data = {
+            'company': self.start.company.id,
+            'term1': self.start.term1,
+            'term2': self.start.term2,
+            'term3': self.start.term3,
+            'unit': self.start.unit,
+            'posted': self.start.posted,
+            'balance_type': self.start.balance_type,
             'employee': self.start.employee.id,
-            'category': self.start.category.id,
             }
         return action, data
 
-class AgedBalance:
+class AgedBalance():
     __name__ = 'account.aged_balance'
 
     @classmethod
     def parse(cls, report, objects, data, localcontext):
         pool = Pool()
+        Party = pool.get('party.party')
+        MoveLine = pool.get('account.move.line')
+        Move = pool.get('account.move')
+        Account = pool.get('account.account')
+        Company = pool.get('company.company')
+        Date = pool.get('ir.date')
+        cursor = Transaction().cursor
+
+        line = MoveLine.__table__()
+        move = Move.__table__()
+        account = Account.__table__()
+
+        company = Company(data['company'])
+        localcontext['digits'] = company.currency.digits
+        localcontext['posted'] = data['posted']
+        with Transaction().set_context(context=localcontext):
+            line_query, _ = MoveLine.query_get(line)
+
+        terms = (data['term1'], data['term2'], data['term3'])
+        if data['unit'] == 'month':
+            coef = datetime.timedelta(days=30)
+        else:
+            coef = datetime.timedelta(days=1)
+
+        kind = {
+            'both': ('payable', 'receivable'),
+            'supplier': ('payable',),
+            'customer': ('receivable',),
+            }[data['balance_type']]
+
+        res = {}
+        for position, term in enumerate(terms):
+            term_query = line.maturity_date <= (Date.today() - term * coef)
+            if position != 2:
+                term_query &= line.maturity_date > (
+                    Date.today() - terms[position + 1] * coef)
+
+            cursor.execute(*line.join(move, condition=line.move == move.id
+                    ).join(account, condition=line.account == account.id
+                    ).select(line.party, Sum(line.debit) - Sum(line.credit),
+                    where=(line.party != None)
+                    & account.active
+                    & account.kind.in_(kind)
+                    & (line.reconciliation == None)
+                    & (account.company == data['company'])
+                    & term_query & line_query,
+                    group_by=line.party,
+                    having=(Sum(line.debit) - Sum(line.credit)) != 0))
+            for party, solde in cursor.fetchall():
+                if party in res:
+                    res[party][position] = solde
+                else:
+                    res[party] = [(i[0] == position) and solde
+                        or Decimal("0.0") for i in enumerate(terms)]
+        parties = Party.search([
+            ('id', 'in', [k for k in res.iterkeys()]),
+            ])
+
+        localcontext['main_title'] = data['balance_type']
+        localcontext['unit'] = data['unit']
+        for i in range(3):
+            localcontext['total' + str(i)] = sum(
+                (v[i] for v in res.itervalues()))
+            localcontext['term' + str(i)] = terms[i]
+
+        localcontext['company'] = company
+        localcontext['employee'] = data['employee']
+        localcontext['parties'] = [{
+                'name': p.rec_name,
+                'amount0': res[p.id][0],
+                'amount1': res[p.id][1],
+                'amount2': res[p.id][2],
+                } for p in parties]
+
+        print "localcontext ", localcontext
         return super(AgedBalance, cls).parse(report, objects, data,
             localcontext)
+
 
 class OpenCostAnalitic(ModelView):
     'Open Cost Analitic'
@@ -1508,10 +1600,10 @@ class TotalAnaliticCost(Report):
         if company.timezone:
             timezone = pytz.timezone(company.timezone)
             Date = Pool().get('ir.date')
-            date = datetime.today()
+            date = datetime.datetime.today()
             dt = date
             print "La fecha ", dt
-            fecha_im = datetime.astimezone(dt.replace(tzinfo=pytz.utc), timezone)
+            fecha_im = datetime.datetime.astimezone(dt.replace(tzinfo=pytz.utc), timezone)
 
         sales = Sale.search([('sale_date', '=', fecha)])
         s_lines = []
@@ -1595,9 +1687,9 @@ class TotalSaleReport(Report):
         if company.timezone:
             timezone = pytz.timezone(company.timezone)
             Date = Pool().get('ir.date')
-            date = datetime.today()
+            date = datetime.datetime.today()
             dt = date
-            fecha_im = datetime.astimezone(dt.replace(tzinfo=pytz.utc), timezone)
+            fecha_im = datetime.datetime.astimezone(dt.replace(tzinfo=pytz.utc), timezone)
 
         print "Lo que tiene el mes ", fecha_im.strftime('%m')
         if (fecha_im.strftime('%m')) == '01':
@@ -1638,6 +1730,7 @@ class TotalSaleReport(Report):
         total_amount_0 = Decimal(0.0)
         total_taxes = Decimal(0.0)
         impuesto = Decimal(0.0)
+        total = Decimal(0.0)
         account_12 = Account.search([('name', '=', 'VENTA DE BIENES')])
         account_0 = Account.search([('name', '=', 'VENTA DE BIENES')])
         account_taxes = Account.search([('name', '=', 'IVA VENTAS LOCALES (EXCLUYE ACTIVOS FIJOS) GRAVADAS TARIFA 12%')])
