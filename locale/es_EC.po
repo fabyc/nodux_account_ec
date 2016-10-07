@@ -481,7 +481,7 @@ msgstr ""
 
 msgctxt "model:ir.action,name:wizard_print_total_sale"
 msgid "Imprimir ventas"
-msgstr ""
+msgstr "Imprimir Analitico de costo de ventas resumido"
 
 msgctxt "model:ir.action,name:wizard_trial_balance_detailed"
 msgid "Trial Balance Detailed"
@@ -521,7 +521,7 @@ msgstr ""
 
 msgctxt "model:ir.ui.menu,name:menu_print_total_sale"
 msgid "Imprimir ventas"
-msgstr ""
+msgstr "Imprimir Analitico de costo de ventas resumido"
 
 msgctxt "model:ir.ui.menu,name:menu_trial_balance_detailed"
 msgid "Trial Balance Detailed"
@@ -537,11 +537,11 @@ msgstr "Auxiliar por Tercero - Iniciar"
 
 msgctxt "model:nodux_account_ec.print_cost_analitic.start,name:"
 msgid "Open Cost Analitic"
-msgstr ""
+msgstr "Analítico de Costo de Ventas"
 
 msgctxt "model:nodux_account_ec.print_total_sale.start,name:"
-msgid "Open Total Sale"
-msgstr ""
+msgid "Open Analitic Cost Summary"
+msgstr "Analítico de Costo de Ventas Resumido"
 
 msgctxt "model:nodux_account_ec.print_trial_balance_detailed.start,name:"
 msgid "Print Trial Balance Detailed"
@@ -809,7 +809,7 @@ msgstr "A LA"
 
 msgctxt "odt:account.balance_sheet:"
 msgid "AÑO 201"
-msgstr ""
+msgstr "AÑO 201"
 
 msgctxt "odt:account.balance_sheet:"
 msgid "Cuenta"
@@ -921,7 +921,7 @@ msgstr ":"
 
 msgctxt "odt:nodux_account_ec.cost_analitic:"
 msgid "A"
-msgstr ""
+msgstr "A"
 
 msgctxt "odt:nodux_account_ec.cost_analitic:"
 msgid "Costo"
@@ -996,7 +996,15 @@ msgid ":"
 msgstr ":"
 
 msgctxt "odt:nodux_account_ec.total_sale:"
+msgid "Analista Contable"
+msgstr ""
+
+msgctxt "odt:nodux_account_ec.total_sale:"
 msgid "Asiento No."
+msgstr ""
+
+msgctxt "odt:nodux_account_ec.total_sale:"
+msgid "Beneficiario"
 msgstr ""
 
 msgctxt "odt:nodux_account_ec.total_sale:"
@@ -1013,6 +1021,10 @@ msgstr ""
 
 msgctxt "odt:nodux_account_ec.total_sale:"
 msgid "Débito"
+msgstr ""
+
+msgctxt "odt:nodux_account_ec.total_sale:"
+msgid "Elaborado por:"
 msgstr ""
 
 msgctxt "odt:nodux_account_ec.total_sale:"
@@ -1086,14 +1098,6 @@ msgstr "AT"
 msgctxt "odt:nodux_account_ec.trial_balance_detailed:"
 msgid "BALANCE"
 msgstr "BALANCE"
-
-msgctxt "odt:nodux_account_ec.trial_balance_detailed:"
-msgid "COD. FINAL :"
-msgstr "COD. FINAL:"
-
-msgctxt "odt:nodux_account_ec.trial_balance_detailed:"
-msgid "COD. INICIAL"
-msgstr "COD. INICIAL:"
 
 msgctxt "odt:nodux_account_ec.trial_balance_detailed:"
 msgid "CREDITO"
@@ -1409,11 +1413,11 @@ msgstr "Imprimir auxiliar por tercero"
 
 msgctxt "view:nodux_account_ec.print_cost_analitic.start:"
 msgid "Analitico de costo de ventas"
-msgstr ""
+msgstr "Análitico de costo de ventas"
 
 msgctxt "view:nodux_account_ec.print_total_sale.start:"
 msgid "Analitico de costo de ventas"
-msgstr "Análitico de costo de ventas"
+msgstr "Análitico de costo de ventas resumido"
 
 msgctxt "view:nodux_account_ec.print_trial_balance_detailed.start:"
 msgid "Print Trial Balance"

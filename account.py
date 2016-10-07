@@ -1626,7 +1626,7 @@ class TotalAnaliticCost(Report):
             localcontext)
 
 class OpenTotalSale(ModelView):
-    'Open Total Sale'
+    'Open Analitic Cost Summary'
     __name__ = 'nodux_account_ec.print_total_sale.start'
     fecha = fields.Date('Fecha de ventas', help='Fecha para asiento de ventas')
     company = fields.Many2One('company.company', 'Company', required=True)
@@ -1642,7 +1642,7 @@ class OpenTotalSale(ModelView):
         return date
 
 class TotalSale(Wizard):
-    'Total Sale'
+    'Open Analitic Cost Summary'
     __name__ = 'nodux_account_ec.print_total_sale'
 
     start = StateView('nodux_account_ec.print_total_sale.start',
@@ -1668,7 +1668,7 @@ class TotalSale(Wizard):
         return 'end'
 
 class TotalSaleReport(Report):
-    'Total Sale Report'
+    'Analitic Cost-Summary'
     __name__ = 'nodux_account_ec.total_sale'
 
     @classmethod
@@ -1683,6 +1683,12 @@ class TotalSaleReport(Report):
         InvoiceLine = pool.get('account.invoice.line')
         Sale = pool.get('sale.sale')
         Account = pool.get('account.account')
+        cuentas = []
+        subtotal_debit = Decimal(0.0)
+        subtotal_credit = Decimal(0.0)
+        total_debit = Decimal (0.0)
+        total_credit = Decimal (0.0)
+        value = Decimal(0.0)
 
         if company.timezone:
             timezone = pytz.timezone(company.timezone)
@@ -1691,7 +1697,65 @@ class TotalSaleReport(Report):
             dt = date
             fecha_im = datetime.datetime.astimezone(dt.replace(tzinfo=pytz.utc), timezone)
 
-        print "Lo que tiene el mes ", fecha_im.strftime('%m')
+        sales = Sale.search([('sale_date', '=', fecha)])
+        for s in sales:
+            invoices = Invoice.search([('description', '=', s.reference)])
+            for i in invoices:
+                id_invoice = i.move.id
+                moves = Move.search([('id', '=', id_invoice)])
+                for m in moves:
+                    id_move = m.id
+                    moveslines = MoveLine.search([('move', '=', id_move)])
+                    for m in moveslines:
+                        if m.account.name in cuentas:
+                            pass
+                        else:
+                            cuentas.append(m.account.name)
+
+        lines = []
+        moves = Move.search([('date', '=', fecha)])
+
+        for c in cuentas:
+            subtotal_debit = Decimal(0.0)
+            subtotal_credit = Decimal(0.0)
+
+            sales = Sale.search([('sale_date', '=', fecha)])
+            for s in sales:
+                invoices = Invoice.search([('description', '=', s.reference)])
+                for i in invoices:
+                    id_invoice = i.move.id
+                    moves = Move.search([('id', '=', id_invoice)])
+                    for m in moves:
+                        id_move = m.id
+                        moveslines = MoveLine.search([('move', '=', id_move)])
+
+                        for m in moveslines:
+                            if c == m.account.name:
+                                subtotal_debit += m.debit
+                                subtotal_credit += m.credit
+                                codigo = m.account.code
+
+            value = subtotal_debit - subtotal_credit
+
+            if value > 0:
+                subtotal_debit = value
+                subtotal_credit = Decimal (0.0)
+            else:
+                subtotal_credit = value * (-1)
+                subtotal_debit = Decimal(0.0)
+
+            lines.append({
+                'codigo': codigo,
+                'cuenta': c,
+                'tipo': 'Fac',
+                'numero_doc': "",
+                'debito': subtotal_debit,
+                'credito' : subtotal_credit,
+            })
+            total_debit += subtotal_debit
+            total_credit += subtotal_credit
+
+
         if (fecha_im.strftime('%m')) == '01':
             mes= 'Enero'
         elif (fecha_im.strftime('%m')) == '02':
@@ -1717,116 +1781,13 @@ class TotalSaleReport(Report):
         elif (fecha_im.strftime('%m')) == '12':
             mes= 'Diciembre'
 
-        invoices = Invoice.search([('invoice_date', '=', fecha)])
-        i_lines = []
-        t_lines = []
-        _0_lines = []
-        _12_lines = []
-        cuenta = ''
-        codigo = ''
-        total_debit = Decimal(0.0)
-        total_credit = Decimal(0.0)
-        total_amount_12 = Decimal(0.0)
-        total_amount_0 = Decimal(0.0)
-        total_taxes = Decimal(0.0)
-        impuesto = Decimal(0.0)
-        total = Decimal(0.0)
-        account_12 = Account.search([('name', '=', 'VENTA DE BIENES')])
-        account_0 = Account.search([('name', '=', 'VENTA DE BIENES')])
-        account_taxes = Account.search([('name', '=', 'IVA VENTAS LOCALES (EXCLUYE ACTIVOS FIJOS) GRAVADAS TARIFA 12%')])
-
-        for i in invoices:
-            amount = Decimal(0.0)
-            invoices_lines = InvoiceLine.search([('invoice','=', i.id)])
-            if i.state == 'paid':
-                moves = Move.search([('id', '=', i.move.id)])
-                for m in moves:
-                    move_lines = MoveLine.search([('description', '=', i.description), ('reconciliation', '=', None)])
-                    for mv_lr in move_lines:
-                        cuenta = mv_lr.account.name
-                        codigo = mv_lr.account.code
-                    move_lines_taxes = MoveLine.search([('party', '=', i.party.id), ('reconciliation', '=', None)])
-                    for mv_lr_t in move_lines_taxes:
-                        #cuenta_impuesto = mv_lr_t.account.name
-                        #codigo_impuesto = mv_lr_t.account.code
-                        impuesto = impuesto + mv_lr_t.credit
-
-            if i.state != 'paid':
-                moves = Move.search([('id', '=', i.move.id)])
-                for m in moves:
-                    move_lines = MoveLine.search([('description', '=', i.description)])
-                    for mv_lr in move_lines:
-                        cuenta = mv_lr.account.name
-                        codigo = mv_lr.account.code
-                    move_lines_taxes = MoveLine.search([('party', '=', i.party.id), ('reconciliation', '=', None)])
-                    for mv_lr_t in move_lines_taxes:
-                        #cuenta_impuesto = mv_lr_t.account.name
-                        #codigo_impuesto = mv_lr_t.account.code
-                        impuesto = impuesto + mv_lr_t.credit
-
-            sale = Sale.search([('reference', '=', i.description)])
-            for s in sale:
-                total = s.total_amount
-                amount = s.untaxed_amount
-                if s.tax_amount_cache > Decimal(0.0):
-                    total_amount_12 = total_amount_12 + amount
-                else:
-                    total_amount_0 = total_amount_0 + amount
-                total_taxes = total_taxes + s.tax_amount_cache
-                total_debit = total_debit + total
-
-            i_lines.append({
-                'codigo': codigo,
-                'cuenta': cuenta,
-                'tipo': 'Fac',
-                'numero_doc': i.number,
-                'debito': total,
-                'cliente': i.party,
-            })
-
-        for c_12 in account_12:
-            codigo_12 = c_12.code
-            cuenta_12 = c_12.name
-
-        for c_0 in account_0:
-            codigo_0 = c_0.code
-            cuenta_0 = c_0.name
-
-        for c_t in account_taxes:
-            codigo_impuesto = c_t.code
-            cuenta_impuesto = c_t.name
-
-        t_lines.append({
-            'codigo': codigo_impuesto,
-            'cuenta': cuenta_impuesto,
-            'tipo': 'Fac',
-            'credito': total_taxes,
-        })
-        _12_lines.append({
-            'codigo': codigo_12,
-            'cuenta': cuenta_12,
-            'tipo': 'Fac',
-            'credito': total_amount_12,
-        })
-        _0_lines.append({
-            'codigo': codigo_0,
-            'cuenta': cuenta_0,
-            'tipo': 'Fac',
-            'credito': total_amount_0,
-        })
-
-        total_credit = total_taxes + total_amount_0 + total_amount_12
-
         localcontext['total_debit'] = total_debit
         localcontext['total_credit'] = total_credit
         localcontext['fecha'] = fecha
         localcontext['mes'] = mes
-        localcontext['lines'] = i_lines
+        localcontext['lines'] = lines
         localcontext['company'] = company
         localcontext['fecha_im'] =  fecha_im
-        localcontext['lines_t'] = t_lines
-        localcontext['lines_12'] = _12_lines
-        localcontext['lines_0'] = _0_lines
 
         return super(TotalSaleReport, cls).parse(report, objects, data,
             localcontext)
