@@ -7,6 +7,8 @@ from .account import *
 #from .tax import *
 from .product import *
 from .invoice import *
+from .move import *
+
 def register():
     Pool.register(
         #Tax,
@@ -29,6 +31,8 @@ def register():
         OpenCostAnalitic,
         #Product,
         OpenTotalSale,
+        Move,
+        Line,
         module='nodux_account_ec', type_='model')
     Pool.register(
         AuxiliaryBook,
