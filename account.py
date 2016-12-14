@@ -1700,17 +1700,19 @@ class TotalSaleReport(Report):
         sales = Sale.search([('sale_date', '=', fecha)])
         for s in sales:
             invoices = Invoice.search([('description', '=', s.reference)])
-            for i in invoices:
-                id_invoice = i.move.id
-                moves = Move.search([('id', '=', id_invoice)])
-                for m in moves:
-                    id_move = m.id
-                    moveslines = MoveLine.search([('move', '=', id_move)])
-                    for m in moveslines:
-                        if m.account.name in cuentas:
-                            pass
-                        else:
-                            cuentas.append(m.account.name)
+            if invoices:
+                for i in invoices:
+                    if i.move:
+                        id_invoice = i.move.id
+                        moves = Move.search([('id', '=', id_invoice)])
+                        for m in moves:
+                            id_move = m.id
+                            moveslines = MoveLine.search([('move', '=', id_move)])
+                            for m in moveslines:
+                                if m.account.name in cuentas:
+                                    pass
+                                else:
+                                    cuentas.append(m.account.name)
 
         lines = []
         moves = Move.search([('date', '=', fecha)])
@@ -1722,18 +1724,20 @@ class TotalSaleReport(Report):
             sales = Sale.search([('sale_date', '=', fecha)])
             for s in sales:
                 invoices = Invoice.search([('description', '=', s.reference)])
-                for i in invoices:
-                    id_invoice = i.move.id
-                    moves = Move.search([('id', '=', id_invoice)])
-                    for m in moves:
-                        id_move = m.id
-                        moveslines = MoveLine.search([('move', '=', id_move)])
+                if invoices:
+                    for i in invoices:
+                        if i.move:
+                            id_invoice = i.move.id
+                            moves = Move.search([('id', '=', id_invoice)])
+                            for m in moves:
+                                id_move = m.id
+                                moveslines = MoveLine.search([('move', '=', id_move)])
 
-                        for m in moveslines:
-                            if c == m.account.name:
-                                subtotal_debit += m.debit
-                                subtotal_credit += m.credit
-                                codigo = m.account.code
+                                for m in moveslines:
+                                    if c == m.account.name:
+                                        subtotal_debit += m.debit
+                                        subtotal_credit += m.credit
+                                        codigo = m.account.code
 
             value = subtotal_debit - subtotal_credit
 
@@ -1791,3 +1795,165 @@ class TotalSaleReport(Report):
 
         return super(TotalSaleReport, cls).parse(report, objects, data,
             localcontext)
+
+class OpenMoveStart(ModelView):
+    'Open Move Statement'
+    __name__ = 'account.open_sumary_move.start'
+
+    date_start = fields.Date('Inicio', required=True)
+    date_end = fields.Date('Fin', required=True)
+    desglosado = fields.Boolean('Desglosado')
+
+    @staticmethod
+    def default_date_start():
+        Date = Pool().get('ir.date')
+        date = Date.today()
+        return date
+
+    @staticmethod
+    def default_date_end():
+        Date = Pool().get('ir.date')
+        date = Date.today()
+        return date
+
+    @staticmethod
+    def default_desglosado():
+        return False
+
+class OpenMoveSummary(Wizard):
+    'Open Move Summary'
+    __name__ = 'account.open_cashflow_statement'
+    start = StateView('account.open_sumary_move.start',
+        'nodux_account_ec.open_sumary_move_start_view_form', [
+            Button('Cancel', 'end', 'tryton-cancel'),
+            Button('Open', 'open_', 'tryton-ok', default=True),
+            ])
+    open_ = StateAction('nodux_account_ec.act_account_sumary_form_tree')
+
+    def do_open_(self, action):
+        pool = Pool()
+        Company = pool.get('company.company')
+        Move = pool.get('account.move')
+        MoveLine = pool.get('account.move.line')
+        fecha = data['fecha']
+        company = Company(data['company'])
+        Invoice = pool.get('account.invoice')
+        InvoiceLine = pool.get('account.invoice.line')
+        Sale = pool.get('sale.sale')
+        Account = pool.get('account.account')
+        cuentas = []
+        subtotal_debit = Decimal(0.0)
+        subtotal_credit = Decimal(0.0)
+        total_debit = Decimal (0.0)
+        total_credit = Decimal (0.0)
+        value = Decimal(0.0)
+
+        if company.timezone:
+            timezone = pytz.timezone(company.timezone)
+            Date = Pool().get('ir.date')
+            date = datetime.datetime.today()
+            dt = date
+            fecha_im = datetime.datetime.astimezone(dt.replace(tzinfo=pytz.utc), timezone)
+
+        sales = Sale.search([('sale_date', '=', fecha)])
+        for s in sales:
+            invoices = Invoice.search([('description', '=', s.reference)])
+            if invoices:
+                for i in invoices:
+                    if i.move:
+                        id_invoice = i.move.id
+                        moves = Move.search([('id', '=', id_invoice)])
+                        for m in moves:
+                            id_move = m.id
+                            moveslines = MoveLine.search([('move', '=', id_move)])
+                            for m in moveslines:
+                                if m.account.name in cuentas:
+                                    pass
+                                else:
+                                    cuentas.append(m.account.name)
+
+        lines = []
+        moves = Move.search([('date', '=', fecha)])
+
+        for c in cuentas:
+            subtotal_debit = Decimal(0.0)
+            subtotal_credit = Decimal(0.0)
+
+            sales = Sale.search([('sale_date', '=', fecha)])
+            for s in sales:
+                invoices = Invoice.search([('description', '=', s.reference)])
+                if invoices:
+                    for i in invoices:
+                        if i.move:
+                            id_invoice = i.move.id
+                            moves = Move.search([('id', '=', id_invoice)])
+                            for m in moves:
+                                id_move = m.id
+                                moveslines = MoveLine.search([('move', '=', id_move)])
+
+                                for m in moveslines:
+                                    if c == m.account.name:
+                                        subtotal_debit += m.debit
+                                        subtotal_credit += m.credit
+                                        codigo = m.account.code
+
+            value = subtotal_debit - subtotal_credit
+
+            if value > 0:
+                subtotal_debit = value
+                subtotal_credit = Decimal (0.0)
+            else:
+                subtotal_credit = value * (-1)
+                subtotal_debit = Decimal(0.0)
+
+            lines.append({
+                'codigo': codigo,
+                'cuenta': c,
+                'tipo': 'Fac',
+                'numero_doc': "",
+                'debito': subtotal_debit,
+                'credito' : subtotal_credit,
+            })
+            total_debit += subtotal_debit
+            total_credit += subtotal_credit
+
+
+        if (fecha_im.strftime('%m')) == '01':
+            mes= 'Enero'
+        elif (fecha_im.strftime('%m')) == '02':
+            mes= 'Febrero'
+        elif (fecha_im.strftime('%m')) == '03':
+            mes= 'Marzo'
+        elif (fecha_im.strftime('%m')) == '04':
+            mes= 'Abril'
+        elif (fecha_im.strftime('%m')) == '05':
+            mes= 'Mayo'
+        elif (fecha_im.strftime('%m')) == '06':
+            mes= 'Junio'
+        elif (fecha_im.strftime('%m')) == '07':
+            mes= 'Julio'
+        elif (fecha_im.strftime('%m')) == '08':
+            mes= 'Agosto'
+        elif (fecha_im.strftime('%m')) == '09':
+            mes= 'Septiembre'
+        elif (fecha_im.strftime('%m')) == '10':
+            mes= 'Octubre'
+        elif (fecha_im.strftime('%m')) == '11':
+            mes= 'Noviembre'
+        elif (fecha_im.strftime('%m')) == '12':
+            mes= 'Diciembre'
+
+        localcontext['total_debit'] = total_debit
+        localcontext['total_credit'] = total_credit
+        localcontext['fecha'] = fecha
+        localcontext['mes'] = mes
+        localcontext['lines'] = lines
+        localcontext['company'] = company
+        localcontext['fecha_im'] =  fecha_im
+
+        action['pyson_context'] = PYSONEncoder().encode({
+                'periods': [p.id for p in end_periods],
+                'posted': self.start.posted,
+                'company': self.start.company.id,
+                })
+        return action, {}
