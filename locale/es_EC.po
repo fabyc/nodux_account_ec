@@ -547,6 +547,10 @@ msgctxt "model:nodux_account_ec.print_trial_balance_detailed.start,name:"
 msgid "Print Trial Balance Detailed"
 msgstr "Imprimir balance de comprobación"
 
+msgctxt "model:res.group,name:group_move_force"
+msgid "Nodux - Editar Asientos Contables"
+msgstr ""
+
 msgctxt "model:res.group,name:group_sale_return"
 msgid "Nodux - Devolucion venta"
 msgstr ""
@@ -914,6 +918,10 @@ msgstr ""
 msgctxt "odt:nodux_account_ec.cost_analitic:"
 msgid "/"
 msgstr "/"
+
+msgctxt "odt:nodux_account_ec.cost_analitic:"
+msgid "100%"
+msgstr ""
 
 msgctxt "odt:nodux_account_ec.cost_analitic:"
 msgid ":"
