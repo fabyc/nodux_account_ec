@@ -8,6 +8,7 @@ from .account import *
 from .product import *
 from .invoice import *
 from .move import *
+from .fiscalyear import *
 
 def register():
     Pool.register(
@@ -33,6 +34,7 @@ def register():
         OpenTotalSale,
         Move,
         Line,
+        FiscalYear,
         module='nodux_account_ec', type_='model')
     Pool.register(
         AuxiliaryBook,
