@@ -15,18 +15,19 @@ __metaclass__ = PoolMeta
 
 class Template:
     __name__ = 'product.template'
-      
-    @classmethod
-    def default_default_uom(cls):
+
+    @staticmethod
+    def default_default_uom():
         Uom = Pool().get('product.uom')
-        uoms = Uom.search(cls.default_uom.domain)
+        uoms = Uom.search([('symbol', '=', 'u'), ('name', '=', 'Unidad')])
         if len(uoms) >= 1:
-            return uoms[29].id
-            
+            for uom in uoms:
+                return uom.id
+
     @staticmethod
     def default_cost_price_method():
         return 'average'
-   
+
     @classmethod
     def __setup__(cls):
         super(Template, cls).__setup__()
@@ -34,7 +35,7 @@ class Template:
             ('name', 'UNIQUE(name)',
                 'NAME Product already exists'),
         ]
-        
+
     def get_full_name(self, name):
         return self.name
 
@@ -44,4 +45,3 @@ class Template:
         localcontext['product'] = Transaction().context.get('product')
         return super(ProductStock, cls).parse(report,
                 objects, data, localcontext)
-  
