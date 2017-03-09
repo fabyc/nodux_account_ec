@@ -27,4 +27,49 @@ this repository contains the full copyright notices and license terms. -->
         <newline/>
     </xpath>
 
+    <xpath
+        expr="/form/notebook/page[@id='accounting']/separator[@id='vat']"
+        position="replace">
+    </xpath>
+    <xpath
+        expr="/form/notebook/page[@id='accounting']/field[@name='vat_number']"
+        position="replace">
+    </xpath>
+
+    <xpath
+        expr="/form/notebook/page[@id='accounting']/label[@name='vat_number']"
+        position="replace">
+    </xpath>
+    <xpath
+        expr="/form/notebook/page[@id='accounting']/field[@name='vat_country']"
+        position="replace">
+    </xpath>
+    <xpath
+        expr="/form/notebook/page[@id='accounting']/label[@name='vat_country']"
+        position="replace">
+    </xpath>
+
+    <xpath
+        expr="/form/notebook/page[@id='accounting']/field[@name='customer_tax_rule']"
+        position="replace">
+    </xpath>
+    <xpath
+        expr="/form/notebook/page[@id='accounting']/label[@name='customer_tax_rule']"
+        position="replace">
+    </xpath>
+
+     <xpath
+        expr="/form/notebook/page[@id='accounting']/field[@name='supplier_tax_rule']"
+        position="replace">
+    </xpath>
+    <xpath
+        expr="/form/notebook/page[@id='accounting']/label[@name='supplier_tax_rule']"
+        position="replace">
+    </xpath>
+
+    <xpath
+        expr="/form/notebook/page[@id='accounting']/separator[@id='taxes']"
+        position="replace">
+    </xpath>
+
 </data>
