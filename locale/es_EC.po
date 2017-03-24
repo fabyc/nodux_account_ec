@@ -12,7 +12,9 @@ msgstr "¡Número de C.I./RUC ya existe!"
 
 msgctxt "error:product.template:"
 msgid "NAME Product already exists"
-msgstr "Nombre de producto ya existe"
+msgstr ""
+"Nombre de producto ya existe. Verifique que el producto se encuentre "
+"INACTIVO"
 
 msgctxt "field:account.account,cashflow:"
 msgid "Cashflow"
